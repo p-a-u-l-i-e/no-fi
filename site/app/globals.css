@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/*
+ * Tokens. light-dark() follows color-scheme, which follows the OS unless the
+ * visitor picked a theme (data-theme on <html>, set by ThemeSwitch).
+ */
+:root {
+  color-scheme: light dark;
+
+  --page: light-dark(#fdfdfd, #121212);
+  --ink: light-dark(#0d0d0d, #fafafa);
+  --muted: light-dark(#666666, #9a9a9a);
+  --card: light-dark(#ffffff, #181818);
+  --stage: light-dark(#f6f6f6, #101010);
+  --chip: light-dark(#f0f0f0, #242424);
+  --chip-hover: light-dark(#e8e8e8, #2d2d2d);
+  --line: color-mix(in oklab, var(--ink) 9%, transparent);
+  --dot: color-mix(in oklab, var(--ink) 13%, transparent);
+  --lift: light-dark(0 1px 3px rgb(0 0 0 / 0.04), none);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-stage: var(--stage);
+  --color-chip: var(--chip);
+  --color-chip-hover: var(--chip-hover);
+  --color-line: var(--line);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, monospace;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+/*
+ * Wireframes are literal characters. Ligatures would turn "<--", "//", and "=="
+ * into single glyphs, so they are off everywhere the mono font is used.
+ */
+/* A button label never wraps, and a button never shrinks in a flex row. */
+button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+pre,
+.font-mono {
+  font-variant-ligatures: none;
+  font-feature-settings:
+    "calt" 0,
+    "liga" 0;
+}
+
+/*
+ * Wireframes use the system monospace font, not the site font. Box-drawing
+ * lines only join up when every border comes from one font, and the line height
+ * has to match the font's own so vertical lines have no gaps.
+ */
+.wire {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", "DejaVu Sans Mono", monospace;
+  line-height: 1.2;
+}
+
+/*
+ * A wireframe never gets clipped: it shrinks to fit its container, up to a
+ * 13px maximum. The container (.fit-stage) measures its own width, and --cols
+ * is the widest line in characters. 0.61em is a little over one monospace cell,
+ * so the text always fits with a hair of slack.
+ */
+.fit-stage {
+  container-type: inline-size;
+}
+
+.fit {
+  font-size: 12px;
+  font-size: min(13px, calc(100cqw / (var(--cols) * 0.61)));
+}
+
+/* Blueprint dots behind the wireframes. */
+.dots {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Text swap used by the copy button. */
+@keyframes swap {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.swap {
+  display: inline-block;
+  animation: swap 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    transition: none;
+  }
+
+  .swap {
+    animation: none;
+  }
+}

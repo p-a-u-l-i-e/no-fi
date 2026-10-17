@@ -1,0 +1,357 @@
+{
+  "groups": ["Structure", "Fields", "Buttons", "Feedback", "Navigation", "Data", "Charts"],
+  "items": [
+    {
+      "name": "Screen",
+      "group": "Structure",
+      "draw": "the outermost container, in double lines: `╔═╗ ║ ╚═╝`. One per wireframe.",
+      "glyph": "╔═══════════╗\n║           ║\n║  A screen ║\n║           ║\n╚═══════════╝",
+      "note": "Double lines mean the outer frame.",
+      "patterns": ["╔═+╗"]
+    },
+    {
+      "name": "Card",
+      "group": "Structure",
+      "draw": "any box inside the screen, in single lines: `┌─┐ │ └─┘`",
+      "glyph": "┌───────────┐\n│ Title     │\n│           │\n└───────────┘",
+      "note": "Single lines mean a nested box. Blank line between stacked cards.",
+      "patterns": ["┌─+┐"]
+    },
+    {
+      "name": "Heading",
+      "group": "Structure",
+      "draw": "`SECTION NAME` in capitals, underlined with `═════` for a major section",
+      "glyph": "SETTINGS\n════════",
+      "note": "Capitals. Underline with a double rule for a major section.",
+      "patterns": ["[║│] ═{10,} [║│]"]
+    },
+    {
+      "name": "Divider",
+      "group": "Structure",
+      "draw": "`─────` across a screen, or `├─────┤` across a card",
+      "glyph": "┌───────────┐\n│ Title     │\n├───────────┤\n│ Body      │\n└───────────┘",
+      "note": "A rule between groups.",
+      "patterns": ["(├─{10,}┤|[║│] ─{10,} [║│])"]
+    },
+    {
+      "name": "Placeholder",
+      "group": "Structure",
+      "draw": "`[image: description]` inside a card",
+      "glyph": "┌─────────────────┐\n│ [image: avatar] │\n└─────────────────┘",
+      "note": "Say what goes there.",
+      "patterns": ["\\[image: "]
+    },
+    {
+      "name": "Skeleton",
+      "group": "Structure",
+      "draw": "`xxxxxxxx  xxxxx` for content still loading",
+      "glyph": "xxxxxxxx  xxxxx\nxxxxxx  xxxxxxx",
+      "note": "Content that has not arrived yet.",
+      "patterns": ["xxxxx"]
+    },
+    {
+      "name": "Annotation",
+      "group": "Structure",
+      "draw": "`<-- note` beside an element. A design note, not part of the UI.",
+      "glyph": "[ Freeze ] <-- asks first",
+      "note": "Design notes live outside the UI.",
+      "patterns": ["<-- "]
+    },
+    {
+      "name": "Input",
+      "group": "Fields",
+      "draw": "`[ value________ ]` on one line, label above",
+      "glyph": "Email *\n[ ana@acme.co______ ]",
+      "note": "One line. Label above, value inside.",
+      "patterns": ["_{4,} ?\\]"]
+    },
+    {
+      "name": "Textarea",
+      "group": "Fields",
+      "draw": "a card several lines tall with a `//` resize grip in the bottom-right",
+      "glyph": "┌──────────────────┐\n│ Add a note...    │\n│                  │\n│               // │\n└──────────────────┘",
+      "note": "Taller than an input. The grip tells them apart.",
+      "patterns": ["//\\s*│"]
+    },
+    {
+      "name": "Search",
+      "group": "Fields",
+      "draw": "`[? Search_____]`",
+      "glyph": "[? Search______]",
+      "note": "A question mark marks it as search.",
+      "patterns": ["\\[\\? "]
+    },
+    {
+      "name": "Select",
+      "group": "Fields",
+      "draw": "`[ Choose      v ]`",
+      "glyph": "[ All types    v ]",
+      "note": "v marks the menu.",
+      "patterns": ["\\[ [A-Za-z0-9: ]+ v \\]"]
+    },
+    {
+      "name": "Menu",
+      "group": "Fields",
+      "draw": "a card directly under an open select, `>` marks the highlighted row",
+      "glyph": "[ All types    v ]\n┌────────────────┐\n│ All types      │\n│ > Income       │\n│ Expenses       │\n└────────────────┘",
+      "note": "The open state of a select.",
+      "patterns": ["v \\] [^\\n]*\\n[║│] +┌─+┐"]
+    },
+    {
+      "name": "Checkbox",
+      "group": "Fields",
+      "draw": "`[x]` checked, `[ ]` unchecked",
+      "glyph": "[x] Email\n[ ] SMS",
+      "note": "x means checked.",
+      "patterns": ["\\[x\\] ", "\\[ \\] "]
+    },
+    {
+      "name": "Radio",
+      "group": "Fields",
+      "draw": "`(*)` selected, `( )` unselected",
+      "glyph": "(*) Daily\n( ) Weekly",
+      "note": "Star means selected.",
+      "patterns": ["\\(\\*\\) ", "\\( \\) "]
+    },
+    {
+      "name": "Toggle",
+      "group": "Fields",
+      "draw": "`[ON ]` / `[OFF]`",
+      "glyph": "[ON ]  [OFF]",
+      "note": "Always four characters wide.",
+      "patterns": ["\\[ON \\]", "\\[OFF\\]"]
+    },
+    {
+      "name": "Slider",
+      "group": "Fields",
+      "draw": "`[----o-------]` with the value beside it",
+      "glyph": "[----o-------]  $200",
+      "note": "o is the handle.",
+      "patterns": ["\\[-+o-+\\]"]
+    },
+    {
+      "name": "Required",
+      "group": "Fields",
+      "draw": "`Name *`",
+      "glyph": "Name *",
+      "note": "Star after the label.",
+      "patterns": ["[A-Za-z] \\*\\s"]
+    },
+    {
+      "name": "Field error",
+      "group": "Fields",
+      "draw": "`(!) message` on the line directly under the field",
+      "glyph": "[ $900.00_______ ]\n(!) Over your limit",
+      "note": "Sits under the field it belongs to.",
+      "patterns": ["_ \\] +[║│]\\n[║│] \\(!\\) "]
+    },
+    {
+      "name": "Primary button",
+      "group": "Buttons",
+      "draw": "`[[ Save ]]`, last in a row",
+      "glyph": "[[ Save ]]",
+      "note": "Double brackets. One per view.",
+      "patterns": ["\\[\\[ [A-Z][A-Za-z ]+ \\]\\]"]
+    },
+    {
+      "name": "Button",
+      "group": "Buttons",
+      "draw": "`[ Cancel ]`",
+      "glyph": "[ Cancel ]",
+      "note": "Single brackets. Secondary actions.",
+      "patterns": ["(?<!\\[)\\[ [A-Z][A-Za-z ]+ \\](?!\\])"]
+    },
+    {
+      "name": "Icon button",
+      "group": "Buttons",
+      "draw": "`[ + ]`, `[ ... ]`, `[ ? ]`",
+      "glyph": "[ + ]  [ ... ]",
+      "note": "A symbol alone. Name it in a note.",
+      "patterns": ["\\[ \\+ \\]", "\\[ \\.\\.\\. \\]"]
+    },
+    {
+      "name": "Disabled",
+      "group": "Buttons",
+      "draw": "`[- Continue -]`, dashes mark it as dimmed",
+      "glyph": "[- Continue -]",
+      "note": "Say why, in a tooltip or note.",
+      "patterns": ["\\[- [A-Z][A-Za-z ]+ -\\]"]
+    },
+    {
+      "name": "Alert",
+      "group": "Feedback",
+      "draw": "a full-width card with a status icon: `(!)` warning, `(i)` info, `(ok)` success, `(x)` error",
+      "glyph": "┌────────────────────────┐\n│ (!) Needs approval     │\n└────────────────────────┘",
+      "note": "Icon, message, optional action.",
+      "patterns": ["[║│] \\((!|i|ok|x)\\) "]
+    },
+    {
+      "name": "Toast",
+      "group": "Feedback",
+      "draw": "a small card with an icon, a short message, and `x` to close",
+      "glyph": "┌──────────────────┐\n│ (ok) Saved     x │\n└──────────────────┘",
+      "note": "Brief. Always closes with x.",
+      "patterns": ["│ \\((!|i|ok|x)\\) [^│║]* x │"]
+    },
+    {
+      "name": "Modal",
+      "group": "Feedback",
+      "draw": "a card inside the screen with a capitalized title, `x`, a divider, body, and actions",
+      "glyph": "┌────────────────┐\n│ FREEZE CARD? x │\n├────────────────┤\n│ Are you sure?  │\n│ [ Cancel ]     │\n└────────────────┘",
+      "note": "Sits inside the screen it covers.",
+      "patterns": ["│ [A-Z][A-Z ?]+ +x │"]
+    },
+    {
+      "name": "Tooltip",
+      "group": "Feedback",
+      "draw": "a small card under its element, with `^` pointing up at it",
+      "glyph": "[ Pay ]\n   ^\n┌──────────────┐\n│ From savings │\n└──────────────┘",
+      "note": "Caret points at the trigger.",
+      "patterns": ["[║│] +\\^ +[║│]\\n[║│] +┌─+┐"]
+    },
+    {
+      "name": "Badge",
+      "group": "Feedback",
+      "draw": "`( Paid )` status pill, `(3)` count",
+      "glyph": "( Paid )  ( Pending )\nInbox (3)",
+      "note": "Pill for status, bare number for a count.",
+      "patterns": ["\\( [A-Za-z]+ \\)", "\\(\\d+\\)"]
+    },
+    {
+      "name": "Tag",
+      "group": "Feedback",
+      "draw": "`<Food x>` removable filter",
+      "glyph": "<Food x>  <May x>",
+      "note": "x removes it.",
+      "patterns": ["<[A-Za-z0-9 ]+ x>"]
+    },
+    {
+      "name": "Avatar",
+      "group": "Feedback",
+      "draw": "`(AN)` initials in a circle",
+      "glyph": "(AN)  Ana Novak",
+      "note": "A person or account.",
+      "patterns": ["\\([A-Z]{2}\\)"]
+    },
+    {
+      "name": "Tabs",
+      "group": "Navigation",
+      "draw": "`[ Active ]  Other  More`",
+      "glyph": "[ Active ]  Other",
+      "note": "Active tab is bracketed.",
+      "patterns": ["\\[ [A-Za-z0-9]+ \\]  [A-Za-z0-9]+  [A-Za-z0-9]+"]
+    },
+    {
+      "name": "Breadcrumb",
+      "group": "Navigation",
+      "draw": "`Home > Cards > Visa`",
+      "glyph": "Home > Cards > Visa",
+      "note": "Greater-than between levels.",
+      "patterns": ["\\w+ > \\w[\\w ]* > "]
+    },
+    {
+      "name": "Pagination",
+      "group": "Navigation",
+      "draw": "`< 1 [2] 3 4 >`",
+      "glyph": "< 1 [2] 3 4 >",
+      "note": "Current page in brackets.",
+      "patterns": ["< 1 \\[\\d\\]"]
+    },
+    {
+      "name": "Stepper",
+      "group": "Navigation",
+      "draw": "`*-----o-----o` with step names below",
+      "glyph": "*-----*-----o\nOne   Two   Three",
+      "note": "Star is reached, o is still ahead.",
+      "patterns": ["\\*-+o"]
+    },
+    {
+      "name": "Accordion",
+      "group": "Navigation",
+      "draw": "`v Open` with content below it, `> Closed`",
+      "glyph": "v Delivery\n    (*) Instantly\n> Advanced",
+      "note": "v is open, > is closed.",
+      "patterns": ["[║│] v [A-Z]", "[║│] > [A-Z]"]
+    },
+    {
+      "name": "Link",
+      "group": "Navigation",
+      "draw": "`Label >`",
+      "glyph": "Export CSV >",
+      "note": "Greater-than after the label.",
+      "patterns": ["[A-Za-z] > +[║│]"]
+    },
+    {
+      "name": "Table",
+      "group": "Data",
+      "draw": "a card with `┬ ┼ ┴` column dividers, header in capitals, `v` or `^` marks the sort",
+      "glyph": "┌────────┬───────┐\n│ NAME v │ TOTAL │\n├────────┼───────┤\n│ Cafe   │ $4.50 │\n└────────┴───────┘",
+      "note": "Sort arrow beside the sorted column.",
+      "patterns": ["│ [A-Z]+ [v^] +│"]
+    },
+    {
+      "name": "Delta",
+      "group": "Data",
+      "draw": "`^ +2.1%` up, `v -3.4%` down",
+      "glyph": "^ +2.1%\nv -3.4%",
+      "note": "Arrow and signed number.",
+      "patterns": ["\\^ \\+\\d", "v -\\d"]
+    },
+    {
+      "name": "Progress",
+      "group": "Data",
+      "draw": "`[=======---] 70%`, `[ ▮▮▮▮▯▯▯▯ ] 50%`, or `[ ████▒▒▒▒ ] 50%`",
+      "glyph": "[=======---] 70%\n[ ▮▮▮▮▯▯▯▯ ] 50%\n[ ████▒▒▒▒ ] 50%",
+      "note": "Three styles. The fill matches the percent.",
+      "patterns": ["\\[=+-*\\] \\d+%", "\\[ ▮+▯* \\] \\d+%", "\\[ █+▒* \\] \\d+%"]
+    },
+    {
+      "name": "Bar chart",
+      "group": "Charts",
+      "draw": "`Rent Co  ████████████  $1,200`: one `█` per fixed unit, and `▏▎▍▌▋▊▉` add eighths. ASCII fallback: `#`",
+      "glyph": "Food  ██████▍       $640\nRent  ████████████  $1,200",
+      "note": "State the unit of one █. The partial block is the remainder.",
+      "patterns": ["[A-Za-z]+ +[█▏▎▍▌▋▊▉]+ +\\$"]
+    },
+    {
+      "name": "Column chart",
+      "group": "Charts",
+      "draw": "`███` columns, one row per fixed unit, a `▁▂▃▄▅▆▇` top for the remainder, `───` baseline, labels below. ASCII fallback: `###`",
+      "glyph": "(one row is $25)\n     ▄▄▄\n███  ███\n███  ███\n───  ───\nMon  Tue",
+      "note": "State what one row is worth. The partial top is the remainder.",
+      "patterns": ["█{3}  █{3}", "(?<=\\s)([▁▂▃▄▅▆▇])\\1\\1(?=\\s|[║│]|$)"]
+    },
+    {
+      "name": "Line chart",
+      "group": "Charts",
+      "draw": "`*` points against a `$400 │` axis and a `└────` baseline",
+      "glyph": "$40 │       *\n$20 │  *  *   *\n $0 │ *\n    └──────────\n     1  2  3  4",
+      "note": "Label the top, middle, and bottom of the axis.",
+      "patterns": ["\\$\\d+k? +│.*\\*"]
+    },
+    {
+      "name": "Sparkline",
+      "group": "Charts",
+      "draw": "`▁▂▃▄▅▆▇█` from low to high. ASCII fallback: `~` then `_ . - = + * #`",
+      "glyph": "▃▂▃▄▆█▇▅▄▃▂▂",
+      "note": "A trend with no axis.",
+      "patterns": ["(▁▂|▂▃|▃▄|▄▅|▅▆|▆▇|▇█|█▇|▇▆|▆▅|▅▄|▄▃|▃▂|▂▁)"]
+    },
+    {
+      "name": "Stacked bar",
+      "group": "Charts",
+      "draw": "`[FFFHHHHTO]` with a legend mapping each letter",
+      "glyph": "[FFFFFFHHHHHHHHTTOOOO]\nF Food  H Home  T Trip",
+      "note": "One letter per share. Legend below.",
+      "patterns": ["\\[([A-Z])\\1+([A-Z])\\2+"]
+    },
+    {
+      "name": "Heatmap",
+      "group": "Charts",
+      "draw": "blank, `░ ▒ ▓ █` from light to dark, two characters per cell, with a `Low ░ ▒ ▓ █ High` legend. ASCII fallback: `. : - = + * # % @`",
+      "glyph": "Mon  ░░▒▒▓▓██▓▓▒▒\nFri  ▒▒▓▓████▓▓░░\n\nLow ░ ▒ ▓ █ High",
+      "note": "Always draw the legend.",
+      "patterns": ["Low [░▒▓█ ]+ High"]
+    }
+  ]
+}

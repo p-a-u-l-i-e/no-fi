@@ -1,0 +1,29 @@
+╔═══════════════════════════════════════════════╗
+║ NOTIFICATIONS                                 ║
+║ ═════════════════════════════════════════════ ║
+║                                               ║
+║ Email alerts                            [ON ] ║
+║ Push alerts                             [OFF] ║
+║                                               ║
+║ Notify me about                               ║
+║ [x] Large transactions                        ║
+║ [x] Failed payments                           ║
+║ [ ] Marketing                                 ║
+║                                               ║
+║ Alert me above                                ║
+║ [-----o------]  $200                          ║
+║                                               ║
+║ v Delivery                                    ║
+║     (*) Instantly      ( ) Daily digest       ║
+║     Quiet hours  [ 22:00 v ]  to  [ 07:00 v ] ║
+║ > Advanced                                    ║
+║                                               ║
+║ Storage used                                  ║
+║ [ █████████████▒▒▒▒▒▒▒ ] 65%                  ║
+║                                               ║
+║ ┌───────────────────────────────────────────┐ ║
+║ │ (i) Changes apply to all devices.         │ ║
+║ └───────────────────────────────────────────┘ ║
+║                                               ║
+║ [- Reset -]                        [[ Save ]] ║
+╚═══════════════════════════════════════════════╝
