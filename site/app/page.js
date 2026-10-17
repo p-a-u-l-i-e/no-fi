@@ -405,13 +405,19 @@ export default function Page() {
               href="https://incomparable.design"
             >
               Built by
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/incomparable.png"
-                alt=""
-                width={20}
-                height={20}
-                className="rounded-full ring-1 ring-line"
+              <span
+                aria-hidden="true"
+                className="h-5 w-[13px] bg-ink"
+                style={{
+                  maskImage: "url(/incomparable.svg)",
+                  maskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  WebkitMaskImage: "url(/incomparable.svg)",
+                  WebkitMaskSize: "contain",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                }}
               />
               <span className="text-ink">Incomparable</span>
             </a>
