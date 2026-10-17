@@ -255,7 +255,7 @@ export default function Page() {
             Wireframes without the distraction.
           </h1>
           <p className="mx-auto mt-5 max-w-[50ch] text-pretty text-base leading-6 text-muted sm:text-[17px] sm:leading-7">
-            no-fi is a Claude skill that draws UI as plain text, so a team argues
+            no-fi is an agent skill that draws UI as plain text, so a team argues
             about layout and flow instead of color and type.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

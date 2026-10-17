@@ -2,7 +2,7 @@
 
 # no-fi
 
-**Wireframes without the distraction.** no-fi is a Claude skill that draws UI as plain text, so a team argues about layout, content, and flow instead of color and type.
+**Wireframes without the distraction.** no-fi is an agent skill that draws UI as plain text, so a team argues about layout, content, and flow instead of color and type.
 
 Ask for a screen and Claude answers with a monospaced drawing: boxes, fields, buttons, tables, and bar charts made from plain characters. There are no colors, fonts, or icons to react to, so the only thing left to discuss is structure.
 
@@ -142,3 +142,7 @@ no-fi/               the skill
   scripts/           wireframe and coverage checks
 assets/              README images
 ```
+
+## License
+
+[MIT](LICENSE)

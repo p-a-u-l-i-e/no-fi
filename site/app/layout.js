@@ -14,13 +14,13 @@ const jetbrains = JetBrains_Mono({
 });
 
 const description =
-  "no-fi is a Claude skill that draws UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.";
+  "no-fi is an agent skill that draws UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: "no-fi: wireframes without the distraction",
   description,
-  keywords: ["wireframes", "plain text", "monospace", "low-fidelity", "Claude skill", "UI design", "prototyping"],
+  keywords: ["wireframes", "plain text", "monospace", "low-fidelity", "agent skill", "UI design", "prototyping"],
   icons: {
     // app/favicon.ico is picked up automatically. Add the SVG for modern browsers.
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
