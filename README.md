@@ -16,7 +16,6 @@ Ask for a screen and Claude answers with a monospaced drawing: boxes, fields, bu
 - [Examples](#examples)
 - [Check your work](#check-your-work)
 - [Repository layout](#repository-layout)
-- [Develop the site](#develop-the-site)
 
 ## What it looks like
 
@@ -141,20 +140,5 @@ no-fi/               the skill
   vocabulary.json    the element vocabulary as data
   examples/          finished example screens
   scripts/           wireframe and coverage checks
-site/                the static page that explains the skill
 assets/              README images
 ```
-
-## Develop the site
-
-The site is a static Next.js export. It lives in [`site/`](site), with its own [README](site/README.md).
-
-```sh
-cd site
-npm install
-npm run dev     # local dev server
-npm run build   # static export to out/
-npm run lint
-```
-
-`site/content/` holds copies of the skill's examples and vocabulary. After changing the originals in `no-fi/`, copy them again as described in the site README.

@@ -24,6 +24,7 @@ export const metadata = {
   icons: {
     // app/favicon.ico is picked up automatically. Add the SVG for modern browsers.
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     title: "no-fi: wireframes without the distraction",
