@@ -393,13 +393,27 @@ export default function Page() {
           <p>
             <span className="font-mono text-ink">[no-fi]</span> Draw it in text first.
           </p>
-          <p>
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <Link className="hover:text-ink" href="/changelog">
               Changelog
             </Link>
-            {" · "}
             <a className="hover:text-ink" href={REPO_URL}>
               Source
+            </a>
+            <a
+              className="inline-flex items-center gap-2 hover:text-ink"
+              href="https://incomparable.design"
+            >
+              Built by
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/incomparable.png"
+                alt=""
+                width={20}
+                height={20}
+                className="rounded-full ring-1 ring-line"
+              />
+              <span className="text-ink">Incomparable</span>
             </a>
           </p>
         </div>
