@@ -1,5 +1,6 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "./site-config";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 // The latin subset has no block characters (progress bars). Glyphs missing from
@@ -16,6 +17,7 @@ const description =
   "no-fi is a Claude skill that draws UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.";
 
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "no-fi: wireframes without the distraction",
   description,
   keywords: ["wireframes", "plain text", "monospace", "low-fidelity", "Claude skill", "UI design", "prototyping"],
@@ -29,7 +31,7 @@ export const metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "no-fi: wireframes without the distraction",
     description,
   },
