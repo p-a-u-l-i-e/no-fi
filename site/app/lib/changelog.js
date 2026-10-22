@@ -1,6 +1,18 @@
 // Newest first. Add a new entry at the top. Skill changes only: no site changes.
 export const entries = [
   {
+    version: "0.3.0",
+    date: "2026-10-22",
+    title: "Stacked columns",
+    changes: [
+      "Stacked column replaces Stacked bar: columns built from █ ▓ ▒ ░ segments in legend order, darkest at the bottom, with a stated row value and a legend naming every shade, instead of a bar of letters. The vocabulary stays at 44 elements.",
+      "The checkers require a stacked column legend to name every shade it uses, and still require 'Low ░ ▒ ▓ █ High' for heatmaps. The Node and Python checkers still give identical output.",
+      "Line charts are drawn as a line: `─` runs that turn with ╭ ╮ ╰ ╯ and climb with │, against a ┤ axis. Rule 1 now allows those rounded corners, and `o` points are the ASCII fallback.",
+      "The checkers accept ╭ ╮ ╰ ╯ as chart characters.",
+      "The spending report screen shows spending by category as weekly stacked columns, and weekly spend as a line.",
+    ],
+  },
+  {
     version: "0.2.1",
     date: "2026-10-22",
     title: "Install with npx",
@@ -8,16 +20,6 @@ export const entries = [
       "Install the skill with `npx no-fi-skill`, which copies it into ~/.claude/skills/no-fi. Add --project to install it into the current project instead, and --force to replace an existing install.",
       "Check a wireframe without installing anything with `npx no-fi-skill check FILE`. It runs the same checker, with the same output.",
       "The skill itself is unchanged from 0.2.0.",
-    ],
-  },
-  {
-    version: "0.3.0",
-    date: "2026-10-22",
-    title: "Stacked columns",
-    changes: [
-      "Stacked column replaces Stacked bar: columns built from █ ▓ ▒ ░ segments in legend order, darkest at the bottom, with a stated row value and a legend naming every shade, instead of a bar of letters. The vocabulary stays at 44 elements.",
-      "The checkers require a stacked column legend to name every shade it uses, and still require 'Low ░ ▒ ▓ █ High' for heatmaps. The Node and Python checkers still give identical output.",
-      "The spending report screen shows spending by category as weekly stacked columns.",
     ],
   },
   {

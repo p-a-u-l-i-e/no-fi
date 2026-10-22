@@ -61,6 +61,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      // Next turns smooth scrolling off during route changes only when this is
+      // set. Without it, going home from /changelog glides to the bottom.
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >

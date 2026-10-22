@@ -324,10 +324,10 @@
     {
       "name": "Line chart",
       "group": "Charts",
-      "draw": "`*` points against a `$400 │` axis and a `└────` baseline",
-      "glyph": "$40 │       *\n$20 │  *  *   *\n $0 │ *\n    └──────────\n     1  2  3  4",
-      "note": "Label the top, middle, and bottom of the axis.",
-      "patterns": ["\\$\\d+k? +│.*\\*"]
+      "draw": "a `─` line that turns with `╭ ╮ ╰ ╯` and climbs with `│`, against a `$400 ┤` axis and a `└────` baseline. ASCII fallback: `o` points",
+      "glyph": "$40 ┤         ╭──╮\n    │         │  │\n$20 ┤   ╭─────╯  ╰──\n    │   │\n $0 ┤───╯\n    └───────────────\n     1  2  3  4  5",
+      "note": "Label the top, middle, and bottom of the axis. Each x label sits under the start of its step.",
+      "patterns": ["\\$\\d+k? +┤", "[╭╰]─+[╮╯]"]
     },
     {
       "name": "Sparkline",
@@ -338,12 +338,12 @@
       "patterns": ["(▁▂|▂▃|▃▄|▄▅|▅▆|▆▇|▇█|█▇|▇▆|▆▅|▅▄|▄▃|▃▂|▂▁)"]
     },
     {
-      "name": "Stacked bar",
+      "name": "Stacked column",
       "group": "Charts",
-      "draw": "`[FFFHHHHTO]` with a legend mapping each letter",
-      "glyph": "[FFFFFFHHHHHHHHTTOOOO]\nF Food  H Home  T Trip",
-      "note": "One letter per share. Legend below.",
-      "patterns": ["\\[([A-Z])\\1+([A-Z])\\2+"]
+      "draw": "`███` columns built from `█ ▓ ▒ ░` segments, one row per fixed unit, `───` baseline, labels below, and a `█ Food  ▓ Home` legend. ASCII fallback: `# = : .`",
+      "glyph": "(one row is $25)\n     ░░░\n▒▒▒  ▒▒▒\n▓▓▓  ▓▓▓\n███  ███\n───  ───\nMon  Tue\n█ Food  ▓ Home  ▒ Trip  ░ Other",
+      "note": "State what one row is worth. Stack in legend order, darkest at the bottom.",
+      "patterns": ["([▓▒░])\\1\\1  ([▓▒░█])\\2\\2", "█ [A-Z][a-z]+[^▓\\n]*▓ [A-Z]"]
     },
     {
       "name": "Heatmap",

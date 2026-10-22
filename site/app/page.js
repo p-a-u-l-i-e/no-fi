@@ -40,7 +40,7 @@ const examples = [
   },
   {
     title: "Spending report",
-    note: "A line chart, a bar chart, a stacked bar, a delta, and budget progress.",
+    note: "A line chart, a bar chart, stacked columns, a delta, and budget progress.",
     file: "spending-report.txt",
     wide: true,
   },

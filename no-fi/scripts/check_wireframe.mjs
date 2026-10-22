@@ -2,7 +2,8 @@
 // Validate a no-fi wireframe.
 //
 // Characters: printable ASCII, box-drawing characters for borders, and block
-// characters for progress bars and charts (see BLOCKS below). Nothing else.
+// characters for progress bars and charts (see BLOCKS below), and rounded corners
+// where a line chart turns. Nothing else.
 //
 // Boxes: the outermost container uses double lines (╔═╗ ║ ╚═╝). Every box nested
 // inside it uses single lines (┌─┐ │ └─┘). Each box must close, its sides must line
@@ -12,7 +13,8 @@
 // - A progress bar's fill must match its percentage.
 // - A bar chart row's length must match its value, using the stated unit
 //   ("one █ is $100"). Without a stated unit the length is not checked.
-// - A heatmap drawn with shade blocks needs a "Low ... High" legend.
+// - A chart drawn with shade blocks needs a legend: "Low ... High" for a
+//   heatmap, or one naming every shade ("█ Food  ▓ Home") for stacked columns.
 // - A column chart needs a stated row value ("one row is $25").
 //
 // This is a port of check_wireframe.py. Keep the two in step.
@@ -33,8 +35,11 @@ const BOX_CHARS = new Set(Object.values(STYLES).flatMap((style) => Object.values
 // Block characters, allowed in progress bars and charts.
 const EIGHTHS = "▏▎▍▌▋▊▉"; // horizontal partials, 1/8 to 7/8 of a cell, left to right
 const VERTICAL = "▁▂▃▄▅▆▇"; // vertical partials, 1/8 to 7/8 of a cell, bottom to top
-const SHADES = "░▒▓"; // heatmap intensity, with █ as the darkest
+const SHADES = "░▒▓"; // heatmap intensity and stacked segments, with █ as the darkest
 const BLOCKS = new Set([...(EIGHTHS + VERTICAL + SHADES + "█▮▯")]);
+
+// Rounded corners, allowed where a line chart turns.
+const CURVES = new Set([..."╭╮╰╯"]);
 
 // Progress bars: (filled, empty) pairs. A bar uses one pair, filled first.
 const UNICODE_BARS = [["▮", "▯"], ["█", "▒"]];
@@ -50,6 +55,7 @@ const BLOCK_ROW = new RegExp(`(?<=\\s)(█*[${EIGHTHS}]?)\\s+${VALUE}(?=\\s|[│
 const HASH_ROW = new RegExp(`(?<=\\s)(#+)\\s+${VALUE}(?=\\s|[│║]|$)`, "g");
 const BLOCK_UNIT = /one █ is \$?([\d,]+(?:\.\d+)?)/;
 const HASH_UNIT = /one # is \$?([\d,]+(?:\.\d+)?)/;
+const SHADE_KEY = /([█░▒▓]) [A-Z]/g;
 
 const number = (text) => Number(text.replace(/,/g, ""));
 
@@ -80,7 +86,7 @@ function checkCharacters(lines) {
     [...line].forEach((ch, index) => {
       const col = index + 1;
       if (ch === "\t") errors.push(`line ${lineNo} col ${col}: tab character, use spaces`);
-      else if (BOX_CHARS.has(ch) || BLOCKS.has(ch)) return;
+      else if (BOX_CHARS.has(ch) || BLOCKS.has(ch) || CURVES.has(ch)) return;
       else if (!(ch >= " " && ch <= "~")) {
         errors.push(`line ${lineNo} col ${col}: unsupported character '${ch}'`);
       }
@@ -135,7 +141,7 @@ function checkBars(lines) {
   return errors;
 }
 
-// Bar charts, heatmaps, and column charts.
+// Bar charts, heatmaps, column charts, and stacked columns.
 function checkCharts(lines) {
   const errors = [];
   const text = lines.join("\n");
@@ -180,9 +186,20 @@ function checkCharts(lines) {
     }
   });
 
-  // A heatmap drawn with shades needs its legend.
-  if ((text.includes("░") || text.includes("▓")) && !/Low [░▒▓█ ]+ High/.test(text)) {
-    errors.push("heatmap: draw a legend like 'Low ░ ▒ ▓ █ High'");
+  // A chart drawn with shades needs its legend. Progress bars use ▒ too, so
+  // leave them out.
+  const charted = text.replace(UNICODE_BAR, "");
+  if ((charted.includes("░") || charted.includes("▓")) && !/Low [░▒▓█ ]+ High/.test(text)) {
+    const named = new Set([...text.matchAll(SHADE_KEY)].map((match) => match[1]));
+    const missing = [...SHADES].filter((c) => charted.includes(c) && !named.has(c));
+    if (named.size === 0) {
+      errors.push(
+        "shaded chart: draw a legend, 'Low ░ ▒ ▓ █ High' for a heatmap " +
+          "or '█ Food  ▓ Home' for stacked columns",
+      );
+    } else if (missing.length) {
+      errors.push(`stacked columns: the legend is missing ${missing.join(" ")}`);
+    }
   }
 
   // A column chart needs to say what a row is worth.

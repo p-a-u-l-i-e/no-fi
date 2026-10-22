@@ -9,7 +9,7 @@ Draw screens as monospaced text. The goal is to make the conversation about stru
 
 ## Rules
 
-1. **Plain characters, plus box-drawing.** Printable ASCII, the box-drawing characters used for borders (`╔ ═ ╗ ║ ╚ ╝` and `┌ ─ ┐ │ └ ┘ ├ ┤ ┬ ┴ ┼`), and block characters for progress bars and charts (`▮ ▯ █ ▒ ░ ▓`, the horizontal eighths `▏▎▍▌▋▊▉`, and the vertical steps `▁▂▃▄▅▆▇`). No emoji, no tabs.
+1. **Plain characters, plus box-drawing.** Printable ASCII, the box-drawing characters used for borders (`╔ ═ ╗ ║ ╚ ╝` and `┌ ─ ┐ │ └ ┘ ├ ┤ ┬ ┴ ┼`), and block characters for progress bars and charts (`▮ ▯ █ ▒ ░ ▓`, the horizontal eighths `▏▎▍▌▋▊▉`, and the vertical steps `▁▂▃▄▅▆▇`), and the rounded corners `╭ ╮ ╰ ╯` where a line chart turns. No emoji, no tabs.
 2. **Double outside, single inside.** The outermost container is drawn with double lines `╔═╗`. Every box inside it uses single lines `┌─┐`.
 3. **Fixed width.** Keep every line at 80 characters or fewer. Every box is exactly as wide on every row.
 4. **Code block.** Always wrap the output in a fenced block with no language tag, so monospacing and alignment hold.
@@ -23,7 +23,7 @@ Draw screens as monospaced text. The goal is to make the conversation about stru
 
    Without Node, `python3 no-fi/scripts/check_wireframe.py` gives the same output.
 
-   It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column top and bottom, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value and stated unit, heatmaps without a legend, and column charts that don't say what a row is worth. Fix every failure before presenting the wireframe.
+   It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column top and bottom, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value and stated unit, heatmaps and stacked columns without a legend, and column charts that don't say what a row is worth. Fix every failure before presenting the wireframe.
 
 ## Draw it like the UI it stands for
 
@@ -113,22 +113,23 @@ Each element should look like the component it represents, not a character that 
 | --- | --- | --- |
 | Bar chart | `Rent Co  ████████████  $1,200`: one `█` per fixed unit, and `▏▎▍▌▋▊▉` add eighths. ASCII fallback: `#` | State the unit of one █. The partial block is the remainder. |
 | Column chart | `███` columns, one row per fixed unit, a `▁▂▃▄▅▆▇` top for the remainder, `───` baseline, labels below. ASCII fallback: `###` | State what one row is worth. The partial top is the remainder. |
-| Line chart | `*` points against a `$400 │` axis and a `└────` baseline | Label the top, middle, and bottom of the axis. |
+| Line chart | a `─` line that turns with `╭ ╮ ╰ ╯` and climbs with `│`, against a `$400 ┤` axis and a `└────` baseline. ASCII fallback: `o` points | Label the top, middle, and bottom of the axis. Each x label sits under the start of its step. |
 | Sparkline | `▁▂▃▄▅▆▇█` from low to high. ASCII fallback: `~` then `_ . - = + * #` | A trend with no axis. |
-| Stacked bar | `[FFFHHHHTO]` with a legend mapping each letter | One letter per share. Legend below. |
+| Stacked column | `███` columns built from `█ ▓ ▒ ░` segments, one row per fixed unit, `───` baseline, labels below, and a `█ Food  ▓ Home` legend. ASCII fallback: `# = : .` | State what one row is worth. Stack in legend order, darkest at the bottom. |
 | Heatmap | blank, `░ ▒ ▓ █` from light to dark, two characters per cell, with a `Low ░ ▒ ▓ █ High` legend. ASCII fallback: `. : - = + * # % @` | Always draw the legend. |
 
 <!-- vocabulary:end -->
 
 ## Charts
 
-- Draw charts with block characters. Each one has an ASCII fallback for places that can't show blocks: `#` for bars, `###` for columns, `~_.-=+*#` for sparklines, and `. : - = + * # % @` for heatmaps. Use one style within a chart.
+- Draw charts with block characters. Each one has an ASCII fallback for places that can't show blocks: `o` points for line charts, `#` for bars, `###` for columns, `~_.-=+*#` for sparklines, `# = : .` for stacked columns, and `. : - = + * # % @` for heatmaps. Use one style within a chart.
 - State what one unit is: `(one █ is $100)`, `(one row is $25)`. The checker compares each bar's length to its value.
 - Use the partial block for the remainder, so 4.1 units is `████▏`, not `████`. A value under one unit is just the partial block.
 - Label the top, middle, and bottom of an axis, and the first and last point on the x axis.
 - Keep a chart under about eight rows or columns. Summarise the rest in words.
 - A bar's fill must agree with its label. The checker enforces this for progress bars and bar charts.
-- Always draw a legend for stacked bars and heatmaps. The checker requires `Low ░ ▒ ▓ █ High` for a shaded heatmap.
+- Always draw a legend for stacked columns and heatmaps. The checker requires `Low ░ ▒ ▓ █ High` for a shaded heatmap, and a legend naming every shade, like `█ Food  ▓ Home`, for stacked columns.
+- Stack segments in legend order, darkest at the bottom, the same order in every column. Use at most four, and group the rest as Other. Round each segment to whole rows and put exact figures in the legend.
 
 ## Layout
 

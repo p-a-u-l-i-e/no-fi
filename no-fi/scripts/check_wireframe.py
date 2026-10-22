@@ -2,7 +2,8 @@
 """Validate a no-fi wireframe.
 
 Characters: printable ASCII, box-drawing characters for borders, and block
-characters for progress bars and charts (see BLOCKS below). Nothing else.
+characters for progress bars and charts (see BLOCKS below), and rounded corners
+where a line chart turns. Nothing else.
 
 Boxes: the outermost container uses double lines (╔═╗ ║ ╚═╝). Every box nested
 inside it uses single lines (┌─┐ │ └─┘). Each box must close, its sides must line
@@ -12,7 +13,8 @@ Bars and charts:
 - A progress bar's fill must match its percentage.
 - A bar chart row's length must match its value, using the stated unit
   ("one █ is $100"). Without a stated unit the length is not checked.
-- A heatmap drawn with shade blocks needs a "Low ... High" legend.
+- A chart drawn with shade blocks needs a legend: "Low ... High" for a
+  heatmap, or one naming every shade ("█ Food  ▓ Home") for stacked columns.
 - A column chart needs a stated row value ("one row is $25").
 
 Usage: check_wireframe.py FILE [FILE ...]
@@ -38,8 +40,11 @@ BOX_CHARS = {c for style in STYLES.values() for c in style.values()}
 # Block characters, allowed in progress bars and charts.
 EIGHTHS = "▏▎▍▌▋▊▉"  # horizontal partials, 1/8 to 7/8 of a cell, left to right
 VERTICAL = "▁▂▃▄▅▆▇"  # vertical partials, 1/8 to 7/8 of a cell, bottom to top
-SHADES = "░▒▓"  # heatmap intensity, with █ as the darkest
+SHADES = "░▒▓"  # heatmap intensity and stacked segments, with █ as the darkest
 BLOCKS = set(EIGHTHS + VERTICAL + SHADES + "█▮▯")
+
+# Rounded corners, allowed where a line chart turns.
+CURVES = set("╭╮╰╯")
 
 # Progress bars: (filled, empty) pairs. A bar uses one pair, filled first.
 UNICODE_BARS = (("▮", "▯"), ("█", "▒"))
@@ -55,6 +60,7 @@ BLOCK_ROW = re.compile(r"(?<=\s)(█*[" + EIGHTHS + r"]?)\s+" + VALUE + r"(?=\s|
 HASH_ROW = re.compile(r"(?<=\s)(#+)\s+" + VALUE + r"(?=\s|[│║]|$)")
 BLOCK_UNIT = re.compile(r"one █ is \$?([\d,]+(?:\.\d+)?)")
 HASH_UNIT = re.compile(r"one # is \$?([\d,]+(?:\.\d+)?)")
+SHADE_KEY = re.compile(r"([█░▒▓]) [A-Z]")
 
 
 def number(text):
@@ -74,7 +80,7 @@ def check_characters(lines):
             col = index + 1
             if ch == "\t":
                 errors.append(f"line {number_} col {col}: tab character, use spaces")
-            elif ch in BOX_CHARS or ch in BLOCKS:
+            elif ch in BOX_CHARS or ch in BLOCKS or ch in CURVES:
                 continue
             elif not (" " <= ch <= "~"):
                 errors.append(f"line {number_} col {col}: unsupported character {ch!r}")
@@ -123,7 +129,7 @@ def check_bars(lines):
 
 
 def check_charts(lines):
-    """Bar charts, heatmaps, and column charts."""
+    """Bar charts, heatmaps, column charts, and stacked columns."""
     errors = []
     text = "\n".join(lines)
 
@@ -158,9 +164,19 @@ def check_charts(lines):
                         f"(one # is {hash_unit.group(1)})"
                     )
 
-    # A heatmap drawn with shades needs its legend.
-    if ("░" in text or "▓" in text) and not re.search(r"Low [░▒▓█ ]+ High", text):
-        errors.append("heatmap: draw a legend like 'Low ░ ▒ ▓ █ High'")
+    # A chart drawn with shades needs its legend. Progress bars use ▒ too, so
+    # leave them out.
+    charted = UNICODE_BAR.sub("", text)
+    if ("░" in charted or "▓" in charted) and not re.search(r"Low [░▒▓█ ]+ High", text):
+        named = set(SHADE_KEY.findall(text))
+        missing = [c for c in SHADES if c in charted and c not in named]
+        if not named:
+            errors.append(
+                "shaded chart: draw a legend, 'Low ░ ▒ ▓ █ High' for a heatmap "
+                "or '█ Food  ▓ Home' for stacked columns"
+            )
+        elif missing:
+            errors.append(f"stacked columns: the legend is missing {' '.join(missing)}")
 
     # A column chart needs to say what a row is worth.
     if re.search(r"─{3}  ─{3}", text) and "one row is" not in text:
