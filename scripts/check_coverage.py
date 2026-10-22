@@ -13,9 +13,11 @@ import re
 import sys
 from pathlib import Path
 
-from check_wireframe import check_text
+# The skill lives in no-fi/, next to this scripts/ folder.
+ROOT = Path(__file__).resolve().parent.parent / "no-fi"
+sys.path.insert(0, str(ROOT / "scripts"))
 
-ROOT = Path(__file__).resolve().parent.parent
+from check_wireframe import check_text  # noqa: E402
 
 
 def load_examples(directory):

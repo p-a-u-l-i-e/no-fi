@@ -33,7 +33,7 @@ nothing under `no-fi/` changed, do not touch the changelog.
 5. Keep the example's counts accurate (for example "44-element vocabulary"). If
    a count in an older entry is now wrong, leave history alone and state the
    new count in the new entry.
-6. If `vocabulary.json` changed, run `python3 no-fi/scripts/sync_vocabulary.py`
+6. If `vocabulary.json` changed, run `python3 scripts/sync_vocabulary.py`
    first, so the changelog describes what shipped.
 7. Run `npm run lint` in `site/` to confirm the page still parses.
 

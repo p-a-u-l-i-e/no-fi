@@ -166,14 +166,4 @@ Each element should look like the component it represents, not a character that 
 ╚═════════════════════════════════════╝
 ```
 
-Seven full screens that use every element are in `examples/`. `scripts/check_coverage.mjs` confirms that none of the vocabulary goes unused.
-
-## Maintaining the vocabulary
-
-`vocabulary.json` is the source of truth. After editing it, run:
-
-```sh
-python3 no-fi/scripts/sync_vocabulary.py      # rewrite the tables above
-node no-fi/scripts/check_coverage.mjs         # every element appears in an example
-node no-fi/scripts/check_wireframe.mjs no-fi/examples/*.txt
-```
+Seven full screens that use every element are in `examples/`.

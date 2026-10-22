@@ -61,7 +61,7 @@ const examples = [
 const screens = [hero, ...examples].map((screen) => ({ ...screen, text: readExample(screen.file) }));
 
 // An element is used by a screen when any of its patterns match that screen.
-// The coverage script in no-fi/scripts applies the same patterns.
+// The coverage script in scripts/ applies the same patterns.
 const matches = (item, text) =>
   item.patterns.some((pattern) => new RegExp(pattern, "m").test(text));
 
@@ -126,16 +126,13 @@ const commands = [
     },
     id: "check",
   },
-  {
-    title: "Check vocabulary coverage",
-    note: "Confirms every element appears in at least one example screen.",
-    commands: {
-      node: "node no-fi/scripts/check_coverage.mjs",
-      python: "python3 no-fi/scripts/check_coverage.py",
-    },
-    id: "coverage",
-  },
 ];
+
+const quickCheck = {
+  title: "Check without installing",
+  note: "Runs the same checker straight from npm.",
+  command: "npx no-fi-skill check wireframe.txt",
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -409,6 +406,7 @@ export default function Page() {
             {commands.map((item) => (
               <RuntimeCard key={item.id} title={item.title} note={item.note} commands={item.commands} />
             ))}
+            <CommandCard item={quickCheck} />
           </div>
         </section>
       </main>

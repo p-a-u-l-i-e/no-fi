@@ -11,7 +11,8 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+# The skill lives in no-fi/, next to this scripts/ folder.
+ROOT = Path(__file__).resolve().parent.parent / "no-fi"
 START = "<!-- vocabulary:start -->"
 END = "<!-- vocabulary:end -->"
 

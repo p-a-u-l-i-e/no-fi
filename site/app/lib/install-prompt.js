@@ -8,6 +8,7 @@ export function installPrompt() {
     "If you can't run npx, download the files listed under \"Skill files\" at",
     `${SITE_URL}/llms.txt into ~/.claude/skills/no-fi/, keeping their paths.`,
     "",
-    "Tell me what you installed. Do not run any of its scripts until I ask.",
+    "Tell me what you installed. The skill runs its own checker on every",
+    "wireframe it draws, which is expected.",
   ].join("\n");
 }

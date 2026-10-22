@@ -12,9 +12,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { checkText } from "./check_wireframe.mjs";
+import { checkText } from "../no-fi/scripts/check_wireframe.mjs";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+// The skill lives in no-fi/, next to this scripts/ folder.
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "no-fi");
 
 function loadExamples(directory) {
   return Object.fromEntries(

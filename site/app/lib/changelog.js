@@ -10,6 +10,7 @@ export const entries = [
       "Line charts are drawn as a line: `─` runs that turn with ╭ ╮ ╰ ╯ and climb with │, against a ┤ axis. Rule 1 now allows those rounded corners, and `o` points are the ASCII fallback.",
       "The checkers accept ╭ ╮ ╰ ╯ as chart characters.",
       "The spending report screen shows spending by category as weekly stacked columns, and weekly spend as a line.",
+      "The skill now ships only what drawing needs: the rules, the vocabulary, the examples, and the wireframe checker. The vocabulary sync and coverage scripts are for maintaining the skill, so they moved out of it.",
     ],
   },
   {

@@ -120,9 +120,7 @@ Seven finished screens in [`no-fi/examples/`](no-fi/examples), built to use the 
 
 ## Check your work
 
-Two scripts ship with the skill. Each comes in Node and Python, with the same output.
-
-**Check a wireframe**
+The checker ships with the skill, in Node and Python with the same output. `npx no-fi-skill check` runs it without installing anything.
 
 ```sh
 node no-fi/scripts/check_wireframe.mjs wireframe.txt
@@ -130,16 +128,19 @@ python3 no-fi/scripts/check_wireframe.py wireframe.txt
 npx no-fi-skill check wireframe.txt
 ```
 
-It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value, heatmaps without a legend, and column charts that don't say what a row is worth.
+It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value, heatmaps and stacked columns without a legend, and column charts that don't say what a row is worth.
 
-**Check vocabulary coverage**
+## Maintaining the vocabulary
+
+`no-fi/vocabulary.json` is the source of truth. These scripts live in `scripts/`, outside the skill, so they don't ship to users. After editing the vocabulary, run:
 
 ```sh
-node no-fi/scripts/check_coverage.mjs
-python3 no-fi/scripts/check_coverage.py
+python3 scripts/sync_vocabulary.py                 # rewrite the tables in SKILL.md
+node scripts/check_coverage.mjs                    # every element appears in an example
+node no-fi/scripts/check_wireframe.mjs no-fi/examples/*.txt
 ```
 
-It confirms every vocabulary element appears in at least one example screen.
+`python3 scripts/check_coverage.py` gives the same coverage output without Node.
 
 ## Repository layout
 
@@ -148,7 +149,8 @@ no-fi/               the skill
   SKILL.md           rules and vocabulary tables
   vocabulary.json    the element vocabulary as data
   examples/          finished example screens
-  scripts/           wireframe and coverage checks
+  scripts/           the wireframe checker
+scripts/             maintainer scripts: vocabulary sync and coverage
 bin/no-fi-skill.mjs  the npx no-fi-skill command
 assets/              README images
 site/                the no-fi.dev site
