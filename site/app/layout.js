@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import MotionProvider from "./components/MotionProvider";
-import { SITE_NAME, SITE_URL } from "./site-config";
+import { NPM_URL, REPO_URL, SITE_NAME, SITE_URL } from "./site-config";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 // The latin subset has no block characters (progress bars). Glyphs missing from
@@ -16,12 +16,12 @@ const jetbrains = JetBrains_Mono({
 });
 
 const description =
-  "no-fi is an agent skill that draws UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.";
+  "no-fi is an agent skill that draws ASCII-style UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "no-fi: wireframes without the distraction",
+    default: "no-fi: plain-text UI wireframes for AI agents",
     template: "%s | no-fi",
   },
   description,
@@ -54,6 +54,29 @@ export const viewport = {
   ],
 };
 
+// Who makes the site, referenced by the home page's SoftwareApplication.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://incomparable.design/#organization",
+      name: "Incomparable",
+      url: "https://incomparable.design",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description,
+      inLanguage: "en",
+      publisher: { "@id": "https://incomparable.design/#organization" },
+      sameAs: [REPO_URL, NPM_URL],
+    },
+  ],
+};
+
 // Runs before first paint so a saved theme never flashes the wrong colors.
 const themeScript = `try{var t=localStorage.getItem("no-fi-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
@@ -69,6 +92,10 @@ export default function RootLayout({ children }) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
       </head>
       <body>
         <MotionProvider>{children}</MotionProvider>

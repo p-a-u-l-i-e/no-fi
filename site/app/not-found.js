@@ -3,6 +3,7 @@ import SiteNav from "./components/SiteNav";
 
 export const metadata = {
   title: "Page not found",
+  alternates: { canonical: null },
 };
 
 // Each digit is five rows of block characters, eight columns wide.

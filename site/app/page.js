@@ -6,8 +6,9 @@ import LatticeBackground from "./components/LatticeBackground";
 import SiteNav from "./components/SiteNav";
 import VocabularyGrid from "./components/VocabularyGrid";
 import { entries } from "./lib/changelog";
+import { faq, plain } from "./lib/faq";
 import { installPrompt } from "./lib/install-prompt";
-import { REPO_URL, SITE_URL } from "./site-config";
+import { NPM_URL, REPO_URL, SITE_URL } from "./site-config";
 
 const content = (...parts) => path.join(process.cwd(), "content", ...parts);
 const readExample = (file) => fs.readFileSync(content("examples", file), "utf8");
@@ -129,7 +130,7 @@ const jsonLd = {
   "@type": "SoftwareApplication",
   name: "no-fi",
   description:
-    "An agent skill that draws low-fidelity UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.",
+    "An agent skill that draws low-fidelity, ASCII-style UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.",
   url: SITE_URL,
   applicationCategory: "DesignApplication",
   operatingSystem: "Any",
@@ -137,10 +138,33 @@ const jsonLd = {
   dateModified: entries[0].date,
   license: "https://opensource.org/licenses/MIT",
   codeRepository: REPO_URL,
-  sameAs: [REPO_URL],
+  sameAs: [REPO_URL, NPM_URL],
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  author: { "@type": "Organization", name: "Incomparable", url: "https://incomparable.design" },
+  author: { "@id": "https://incomparable.design/#organization" },
 };
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: plain(answer) },
+  })),
+};
+
+// Backticks in an answer become inline code.
+function Answer({ text }) {
+  return text.split("`").map((part, index) =>
+    index % 2 ? (
+      <code key={index} className="font-mono text-[0.9em] text-ink [overflow-wrap:anywhere]">
+        {part}
+      </code>
+    ) : (
+      part
+    ),
+  );
+}
 
 function CommandCard({ item }) {
   return (
@@ -251,6 +275,10 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
+      />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-30 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-page"
@@ -267,8 +295,8 @@ export default function Page() {
             Wireframes without the distraction.
           </h1>
           <p className="mx-auto mt-5 max-w-[50ch] text-pretty text-base leading-6 text-muted sm:text-[17px] sm:leading-7">
-            no-fi is an agent skill that draws UI as plain text, so a team argues
-            about layout and flow instead of color and type.
+            no-fi is an agent skill that draws UI as ASCII-style text wireframes, so
+            a team argues about layout and flow instead of color and type.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
@@ -332,8 +360,8 @@ export default function Page() {
           </Heading>
           <p className="mt-4 max-w-[60ch] text-muted">
             {items.length} elements in {vocabulary.groups.length} groups. Inputs and
-            textareas are different shapes. A badge is a pill. An alert is a box with
-            an icon, not a stray character.
+            textareas have different shapes, a badge is a pill, and an alert is a box
+            with an icon.
           </p>
           <VocabularyGrid groups={vocabulary.groups} items={items} />
         </section>
@@ -416,6 +444,25 @@ export default function Page() {
             </pre>
             <CopyButton text={checkCommand} />
           </div>
+        </section>
+
+        <section id="faq" className="mt-28 sm:mt-36">
+          <Heading lead="Questions" id="faq-heading">
+            about no-fi.
+          </Heading>
+          <dl className="mt-10 border-t border-line">
+            {faq.map(({ question, answer }) => (
+              <div
+                key={question}
+                className="grid gap-1 border-b border-line py-6 sm:grid-cols-[minmax(0,24rem)_1fr] sm:gap-6"
+              >
+                <dt className="text-lg font-medium tracking-[-0.01em]">{question}</dt>
+                <dd className="text-muted">
+                  <Answer text={answer} />
+                </dd>
+              </div>
+            ))}
+          </dl>
         </section>
       </main>
 

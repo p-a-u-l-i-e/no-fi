@@ -2,14 +2,16 @@ import SiteNav from "../components/SiteNav";
 import { entries } from "../lib/changelog";
 
 const title = "Changelog";
-const description = "What changed in the no-fi skill, newest first: new vocabulary, chart types, and checker rules.";
+const description =
+  "Every release of the no-fi skill, newest first: new vocabulary elements, chart types, and checker rules. Check what changed before you update.";
+const images = ["/opengraph-image.png"];
 
 export const metadata = {
   title,
   description,
   alternates: { canonical: "/changelog" },
-  openGraph: { title: "Changelog | no-fi", description, type: "website", url: "/changelog", siteName: "no-fi" },
-  twitter: { card: "summary_large_image", title: "Changelog | no-fi", description },
+  openGraph: { title: "Changelog | no-fi", description, type: "website", url: "/changelog", siteName: "no-fi", images },
+  twitter: { card: "summary_large_image", title: "Changelog | no-fi", description, images },
 };
 
 export default function ChangelogPage() {
