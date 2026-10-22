@@ -411,6 +411,10 @@ export default function Page() {
             <a className="underline underline-offset-4 hover:text-ink" href={REPO_URL}>
               GitHub
             </a>
+            , and the package is on{" "}
+            <a className="underline underline-offset-4 hover:text-ink" href={NPM_URL}>
+              npm
+            </a>
             . On claude.ai, use the repository&apos;s Download ZIP and upload it under
             Settings, Capabilities, Skills.
           </p>
@@ -477,6 +481,9 @@ export default function Page() {
             </Link>
             <a className="hover:text-ink" href={REPO_URL}>
               Source
+            </a>
+            <a className="hover:text-ink" href={NPM_URL}>
+              npm
             </a>
             <a
               className="inline-flex items-center gap-2 hover:text-ink"
