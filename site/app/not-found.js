@@ -33,7 +33,7 @@ export default function NotFound() {
         <p className="mt-3 text-muted">Nothing is drawn at this address yet.</p>
         <Link
           href="/"
-          className="mt-8 inline-flex h-9 items-center whitespace-nowrap rounded-full bg-ink px-5 text-sm font-medium text-page transition-opacity duration-80 hover:opacity-85"
+          className="mt-8 inline-flex h-9 items-center whitespace-nowrap btn btn-primary rounded-full px-5 text-sm font-medium text-page"
         >
           Back to home
         </Link>

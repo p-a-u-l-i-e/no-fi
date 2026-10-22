@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import MotionProvider from "./components/MotionProvider";
@@ -68,6 +69,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <MotionProvider>{children}</MotionProvider>
+        <Analytics />
       </body>
     </html>
   );

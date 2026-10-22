@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
+import { useFluidHover, useRegisterFluidHoverItem } from "@/hooks/use-fluid-hover";
 import { spring } from "@/lib/springs";
 
 const sections = [
@@ -44,9 +46,14 @@ export default function NavLinks() {
     };
   }, [home]);
 
-  const link = (key, label, href, isActive) => (
-    <Link
+  const listRef = useRef(null);
+  const hover = useFluidHover(listRef, { axis: "x" });
+
+  const link = (key, label, href, isActive, index) => (
+    <NavLink
       key={key}
+      index={index}
+      registerItem={hover.registerItem}
       href={href}
       aria-current={isActive ? (key === "changelog" ? "page" : "true") : undefined}
       className={`relative inline-flex h-9 items-center whitespace-nowrap rounded-full px-3 text-sm transition-colors duration-80 ${
@@ -63,15 +70,29 @@ export default function NavLinks() {
         />
       ) : null}
       <span className="relative">{label}</span>
-    </Link>
+    </NavLink>
   );
 
   return (
-    <>
-      {sections.map(([label, id]) =>
-        link(id, label, home ? `#${id}` : `/#${id}`, home && active === id),
+    <div ref={listRef} className="relative flex items-center" {...hover.handlers}>
+      <FluidHoverHighlight hover={hover} className="rounded-full bg-chip/50" />
+      {sections.map(([label, id], index) =>
+        link(id, label, home ? `#${id}` : `/#${id}`, home && active === id, index),
       )}
-      {link("changelog", "Changelog", "/changelog", pathname.startsWith("/changelog"))}
-    </>
+      {link(
+        "changelog",
+        "Changelog",
+        "/changelog",
+        pathname.startsWith("/changelog"),
+        sections.length,
+      )}
+    </div>
   );
+}
+
+// A nav link that joins the nav's gliding hover.
+function NavLink({ index, registerItem, ...props }) {
+  const ref = useRef(null);
+  useRegisterFluidHoverItem(registerItem, index, ref);
+  return <Link ref={ref} {...props} />;
 }

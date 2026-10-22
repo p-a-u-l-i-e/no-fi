@@ -110,6 +110,90 @@ pre,
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
+  animation: focus-in 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* The focus ring settles in from a little further out instead of popping on. */
+@keyframes focus-in {
+  from {
+    outline-color: transparent;
+    outline-offset: 5px;
+  }
+}
+
+/*
+ * Buttons press, after Fluid Functionalism's Button. The fill sits 1px inside
+ * the button and a same-color 1px shadow fills it back out. Pressing collapses
+ * the shadow, so the button shrinks exactly 1px per side at any width, where a
+ * scale would shrink a wide button more sideways than up and down. The press
+ * lands fast (80ms) and releases slowly (180ms).
+ */
+@layer components {
+  .btn {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: -1;
+    border-radius: inherit;
+    background-color: var(--btn-bg);
+    box-shadow: 0 0 0 1px var(--btn-bg);
+    transition:
+      box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 80ms ease;
+  }
+
+  .btn:active::before {
+    box-shadow: 0 0 0 0 var(--btn-bg);
+    transition-duration: 80ms, 80ms;
+  }
+
+  .btn-primary {
+    --btn-bg: var(--ink);
+  }
+
+  .btn-primary:hover {
+    --btn-bg: color-mix(in oklab, var(--ink) 90%, var(--page));
+  }
+
+  .btn-primary:active {
+    --btn-bg: color-mix(in oklab, var(--ink) 80%, var(--page));
+  }
+
+  .btn-secondary {
+    --btn-bg: var(--chip);
+  }
+
+  .btn-secondary:hover {
+    --btn-bg: var(--chip-hover);
+  }
+
+  .btn-secondary:active {
+    --btn-bg: var(--chip);
+  }
+
+  /* Outlined. The ring is an outer shadow at rest and an inset one when
+     pressed, so it moves inward with the shrinking fill. Hover comes from the
+     group's gliding highlight, not from the button. */
+  .btn-tertiary {
+    --btn-bg: transparent;
+  }
+
+  .btn-tertiary::before {
+    box-shadow:
+      0 0 0 1px var(--line),
+      inset 0 0 0 0 var(--line);
+  }
+
+  .btn-tertiary:active::before {
+    box-shadow:
+      0 0 0 0 var(--line),
+      inset 0 0 0 1px var(--line);
+  }
 }
 
 /* Text swap used by the copy button. */
@@ -140,7 +224,8 @@ pre,
     transition: none;
   }
 
-  .swap {
+  .swap,
+  :focus-visible {
     animation: none;
   }
 }

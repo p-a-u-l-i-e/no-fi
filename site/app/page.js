@@ -286,13 +286,13 @@ export default function Page() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#get-started"
-              className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-ink px-5 text-sm font-medium text-page transition-opacity duration-80 hover:opacity-85"
+              className="inline-flex h-9 items-center whitespace-nowrap btn btn-primary rounded-full px-5 text-sm font-medium text-page"
             >
               Install the skill
             </a>
             <a
               href="#examples"
-              className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-chip px-5 text-sm font-medium transition-colors duration-80 hover:bg-chip-hover"
+              className="inline-flex h-9 items-center whitespace-nowrap btn btn-secondary rounded-full px-5 text-sm font-medium"
             >
               See examples
             </a>

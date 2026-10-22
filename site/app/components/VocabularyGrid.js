@@ -42,8 +42,8 @@ function Chip({ index, registerItem, active, onClick, children }) {
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`relative inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-[13px] font-medium transition-colors duration-80 ${
-        active ? "border-ink bg-ink text-page" : "border-line text-ink"
+      className={`btn inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[13px] font-medium transition-colors duration-80 ${
+        active ? "btn-primary text-page" : "btn-tertiary text-ink"
       }`}
     >
       {children}
