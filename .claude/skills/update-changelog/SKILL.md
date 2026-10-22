@@ -37,6 +37,13 @@ nothing under `plugin/` changed, do not touch the changelog.
    first, so the changelog describes what shipped.
 7. Run `npm run lint` in `site/` to confirm the page still parses.
 
+## Release
+A new entry is a new version. Set the same version in `package.json` and
+`plugin/.claude-plugin/plugin.json`, commit, then tag and push the tag:
+`git tag v0.3.2 && git push origin v0.3.2`. The publish workflow checks that
+the tag, both files, and the newest entry agree, runs the checks, and
+publishes to npm. The plugin directory picks up the new commit on `main`.
+
 ## Don't
 - Don't add an entry for a site-only change, even a visible one.
 - Don't invent changes the diff does not show.

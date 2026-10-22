@@ -1,0 +1,44 @@
+# Publishes no-fi-skill to npm when a version tag (v0.3.1) is pushed.
+# npm trusts this workflow through trusted publishing, so no token is stored.
+# Set it up once on npmjs.com: no-fi-skill > Settings > Trusted publisher >
+# GitHub Actions, repository p-a-u-l-i-e/no-fi, workflow publish.yml.
+name: Publish to npm
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@latest
+
+      - name: Check the tag matches every version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg=$(node -p "require('./package.json').version")
+          plugin=$(node -p "require('./plugin/.claude-plugin/plugin.json').version")
+          log=$(grep -m1 -oE 'version: "[^"]+"' site/app/lib/changelog.js | cut -d'"' -f2)
+          echo "tag $tag, package.json $pkg, plugin.json $plugin, changelog $log"
+          [ "$tag" = "$pkg" ] && [ "$tag" = "$plugin" ] && [ "$tag" = "$log" ]
+
+      - name: Check the skill
+        run: |
+          python3 scripts/sync_vocabulary.py --check
+          node scripts/check_coverage.mjs
+          node plugin/skills/no-fi/scripts/check_wireframe.mjs plugin/skills/no-fi/examples/*.txt
+
+      - run: npm publish --access public
