@@ -2,6 +2,7 @@
   "name": "site",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -21,5 +22,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
     "tailwindcss": "^4"
+  },
+  "allowScripts": {
+    "unrs-resolver": false
   }
 }
