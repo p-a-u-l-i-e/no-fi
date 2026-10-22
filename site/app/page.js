@@ -98,7 +98,7 @@ const installOptions = [
   {
     id: "prompt",
     title: "Copy install prompt",
-    note: "Paste it into Claude Code or any agent. It lists every file as a readable URL.",
+    note: "Paste it into Claude Code or any agent. It uses npx, or the plain files if npx is unavailable.",
     command: prompt,
     prompt: true,
   },
