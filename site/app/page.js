@@ -6,8 +6,9 @@ import LatticeBackground from "./components/LatticeBackground";
 import RuntimeCard from "./components/RuntimeCard";
 import SiteNav from "./components/SiteNav";
 import VocabularyGrid from "./components/VocabularyGrid";
+import { entries } from "./lib/changelog";
 import { installPrompt } from "./lib/install-prompt";
-import { REPO, REPO_URL } from "./site-config";
+import { REPO, REPO_URL, SITE_URL } from "./site-config";
 
 const content = (...parts) => path.join(process.cwd(), "content", ...parts);
 const readExample = (file) => fs.readFileSync(content("examples", file), "utf8");
@@ -136,6 +137,24 @@ const commands = [
   },
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "no-fi",
+  description:
+    "An agent skill that draws low-fidelity UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.",
+  url: SITE_URL,
+  applicationCategory: "DesignApplication",
+  operatingSystem: "Any",
+  softwareVersion: entries[0].version,
+  dateModified: entries[0].date,
+  license: "https://opensource.org/licenses/MIT",
+  codeRepository: REPO_URL,
+  sameAs: [REPO_URL],
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: { "@type": "Organization", name: "Incomparable", url: "https://incomparable.design" },
+};
+
 function CommandCard({ item }) {
   return (
     <article className="flex min-w-0 flex-col rounded-[28px] border border-line bg-card p-2 shadow-[var(--lift)]">
@@ -239,6 +258,10 @@ export default function Page() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-30 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-page"

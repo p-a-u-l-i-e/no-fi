@@ -1,6 +1,6 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { SITE_URL } from "./site-config";
+import { SITE_NAME, SITE_URL } from "./site-config";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 // The latin subset has no block characters (progress bars). Glyphs missing from
@@ -18,8 +18,12 @@ const description =
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "no-fi: wireframes without the distraction",
+  title: {
+    default: "no-fi: wireframes without the distraction",
+    template: "%s | no-fi",
+  },
   description,
+  alternates: { canonical: "/" },
   keywords: ["wireframes", "plain text", "monospace", "low-fidelity", "agent skill", "UI design", "prototyping"],
   icons: {
     // app/favicon.ico is picked up automatically. Add the SVG for modern browsers.
@@ -30,12 +34,22 @@ export const metadata = {
     title: "no-fi: wireframes without the distraction",
     description,
     type: "website",
+    url: "/",
+    siteName: SITE_NAME,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "no-fi: wireframes without the distraction",
     description,
   },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fdfdfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#121212" },
+  ],
 };
 
 // Runs before first paint so a saved theme never flashes the wrong colors.

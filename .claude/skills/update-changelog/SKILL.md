@@ -5,7 +5,7 @@ description: Record a change to the no-fi skill in the changelog. Use after any 
 
 # Update the changelog
 
-The changelog is the `entries` array in `site/app/changelog/page.js`, newest
+The changelog is the `entries` array in `site/app/lib/changelog.js`, newest
 first. It describes the **skill**. The site is a demo, so it never appears in it.
 
 ## What counts
