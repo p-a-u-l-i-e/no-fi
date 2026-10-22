@@ -41,6 +41,10 @@ The outer frame is double-lined, every box inside it is single-lined, and the pr
 
 Pick one. Each puts the `no-fi/` folder where your agent loads skills from.
 
+**With a prompt**
+
+Copy the install prompt from [no-fi.dev](https://no-fi.dev/#get-started) and paste it into Claude Code or any agent. It runs the npx command below, or downloads the files one by one if it can't run npx.
+
 **With npx**
 
 ```sh
@@ -64,13 +68,13 @@ cp -R no-fi/no-fi ~/.claude/skills/
 
 **On claude.ai**
 
-Download the repository as a ZIP and upload it under Settings, Capabilities, Skills.
+Download [no-fi.zip](https://no-fi.dev/no-fi.zip) and upload it under Settings, Capabilities, Skills. It holds only the skill folder. GitHub's Download ZIP holds the whole repository, which claude.ai won't take as a skill.
 
-The skill is plain text and a few small scripts, so you can read every file before you install it.
+The skill is plain text plus one small checker script, in Node and Python, so you can read every file before you install it.
 
 ## Use it
 
-Ask for a screen the way you would ask a designer for a sketch:
+Ask for a screen the way you would ask a designer for a sketch. Saying wireframe or sketch is enough to load the skill, or type `/no-fi` in Claude Code.
 
 > Wireframe a send-money form with three steps.
 >
@@ -120,12 +124,17 @@ Seven finished screens in [`no-fi/examples/`](no-fi/examples), built to use the 
 
 ## Check your work
 
-The checker ships with the skill, in Node and Python with the same output. `npx no-fi-skill check` runs it without installing anything.
+Your agent checks every wireframe before it shows you one. To check one yourself, from anywhere:
 
 ```sh
-node no-fi/scripts/check_wireframe.mjs wireframe.txt
-python3 no-fi/scripts/check_wireframe.py wireframe.txt
 npx no-fi-skill check wireframe.txt
+```
+
+The checker also ships with the skill, in Node and Python with the same output. From an install, or from this repository:
+
+```sh
+node ~/.claude/skills/no-fi/scripts/check_wireframe.mjs wireframe.txt
+python3 no-fi/scripts/check_wireframe.py wireframe.txt
 ```
 
 It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value, heatmaps and stacked columns without a legend, and column charts that don't say what a row is worth.

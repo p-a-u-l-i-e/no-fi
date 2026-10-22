@@ -415,8 +415,11 @@ export default function Page() {
             <a className="underline underline-offset-4 hover:text-ink" href={NPM_URL}>
               npm
             </a>
-            . On claude.ai, use the repository&apos;s Download ZIP and upload it under
-            Settings, Capabilities, Skills.
+            . On claude.ai, download{" "}
+            <a className="underline underline-offset-4 hover:text-ink" href="/no-fi.zip" download>
+              no-fi.zip
+            </a>{" "}
+            and upload it under Settings, Capabilities, Skills.
           </p>
           <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
             {installOptions.map((item) => (

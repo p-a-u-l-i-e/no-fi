@@ -20,7 +20,7 @@ export function GET() {
     "- With npx: `npx no-fi-skill` (add `--project` to install into the current project)",
     `- With the skills CLI: \`npx skills add ${REPO} --skill no-fi\``,
     "- By hand: copy the `no-fi` folder into `~/.claude/skills/`",
-    "- In claude.ai: download the repository as a ZIP and upload it under Settings, Capabilities, Skills",
+    `- In claude.ai: download ${SITE_URL}/no-fi.zip and upload it under Settings, Capabilities, Skills`,
     "",
     "## Skill files",
     "",
