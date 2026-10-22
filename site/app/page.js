@@ -158,9 +158,11 @@ const jsonLd = {
 function CommandCard({ item }) {
   return (
     <article className="flex min-w-0 flex-col rounded-[28px] border border-line bg-card p-2 shadow-[var(--lift)]">
-      <div className="flex h-28 flex-none items-center overflow-x-auto rounded-[20px] bg-stage p-6">
+      <div
+        className={`flex h-28 flex-none items-center rounded-[20px] bg-stage p-6 ${item.prompt ? "overflow-hidden" : "overflow-x-auto"}`}
+      >
         {item.prompt ? (
-          <pre className="line-clamp-3 whitespace-pre-wrap font-mono text-[13px] leading-6">
+          <pre className="line-clamp-3 min-w-0 whitespace-pre-wrap font-mono text-[13px] leading-6 [overflow-wrap:anywhere]">
             {item.command}
           </pre>
         ) : (
