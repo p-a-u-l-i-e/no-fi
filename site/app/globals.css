@@ -53,8 +53,8 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   transition:
-    background-color 200ms ease,
-    color 200ms ease;
+    background-color 240ms ease,
+    color 240ms ease;
 }
 
 /*

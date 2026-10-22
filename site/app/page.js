@@ -229,8 +229,8 @@ function CardFooter({ title, note, copyText, copyLabel, uses }) {
       </div>
       {uses && uses.length > 0 ? (
         <details className="group mt-3 text-sm">
-          <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-muted transition-colors duration-150 hover:text-ink">
-            <span aria-hidden="true" className="inline-block transition-transform duration-150 group-open:rotate-90">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-muted transition-colors duration-80 hover:text-ink">
+            <span aria-hidden="true" className="inline-block transition-transform duration-160 group-open:rotate-90">
               &gt;
             </span>
             Uses {uses.length} elements
@@ -286,13 +286,13 @@ export default function Page() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#get-started"
-              className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-ink px-5 text-sm font-medium text-page transition-opacity duration-150 hover:opacity-85"
+              className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-ink px-5 text-sm font-medium text-page transition-opacity duration-80 hover:opacity-85"
             >
               Install the skill
             </a>
             <a
               href="#examples"
-              className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-chip px-5 text-sm font-medium transition-colors duration-150 hover:bg-chip-hover"
+              className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-chip px-5 text-sm font-medium transition-colors duration-80 hover:bg-chip-hover"
             >
               See examples
             </a>

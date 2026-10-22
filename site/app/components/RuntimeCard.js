@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { motion } from "motion/react";
+import { useId, useState } from "react";
+import { spring } from "@/lib/springs";
 import CopyButton from "./CopyButton";
 
 // A command card that can show the same command for Node or Python.
 export default function RuntimeCard({ title, note, commands }) {
   const [runtime, setRuntime] = useState("node");
   const command = commands[runtime];
+  // Each card has its own thumb, so the layout id has to be unique per card.
+  const thumbId = useId();
 
   return (
     <article className="flex min-w-0 flex-col rounded-[28px] border border-line bg-card p-2 shadow-[var(--lift)]">
@@ -33,11 +37,18 @@ export default function RuntimeCard({ title, note, commands }) {
                   type="button"
                   aria-pressed={runtime === key}
                   onClick={() => setRuntime(key)}
-                  className={`h-7 rounded-full px-2.5 transition-colors duration-150 ${
-                    runtime === key ? "bg-card text-ink shadow-sm" : "text-muted hover:text-ink"
+                  className={`relative h-6 rounded-full px-2.5 transition-colors duration-80 ${
+                    runtime === key ? "text-ink" : "text-muted hover:text-ink"
                   }`}
                 >
-                  {label}
+                  {runtime === key ? (
+                    <motion.span
+                      layoutId={thumbId}
+                      transition={spring.moderate}
+                      className="absolute inset-0 rounded-full bg-card shadow-sm"
+                    />
+                  ) : null}
+                  <span className="relative">{label}</span>
                 </button>
               ))}
             </div>

@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { spring } from "@/lib/springs";
 
 const sections = [
   ["Rules", "rules"],
@@ -47,11 +49,20 @@ export default function NavLinks() {
       key={key}
       href={href}
       aria-current={isActive ? (key === "changelog" ? "page" : "true") : undefined}
-      className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors duration-150 ${
-        isActive ? "bg-chip text-ink" : "text-muted hover:text-ink"
+      className={`relative inline-flex h-9 items-center whitespace-nowrap rounded-full px-3 text-sm transition-colors duration-80 ${
+        isActive ? "text-ink" : "text-muted hover:text-ink"
       }`}
     >
-      {label}
+      {/* One pill for the whole nav. It slides to the active link instead of
+          blinking off one and on another. */}
+      {isActive ? (
+        <motion.span
+          layoutId="nav-pill"
+          transition={spring.moderate}
+          className="absolute inset-0 rounded-full bg-chip"
+        />
+      ) : null}
+      <span className="relative">{label}</span>
     </Link>
   );
 

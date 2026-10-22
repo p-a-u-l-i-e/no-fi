@@ -21,7 +21,7 @@ export default function CopyButton({ text, label = "Copy" }) {
     <button
       type="button"
       onClick={copy}
-      className="inline-flex h-8 min-w-[4.5rem] shrink-0 items-center whitespace-nowrap justify-center rounded-full bg-chip px-3 text-[13px] font-medium text-ink transition-colors duration-150 hover:bg-chip-hover"
+      className="inline-flex h-7 min-w-[4.5rem] shrink-0 items-center whitespace-nowrap justify-center rounded-full bg-chip px-3 text-[13px] font-medium text-ink transition-colors duration-80 hover:bg-chip-hover"
     >
       <span key={copied ? "done" : "idle"} className="swap">
         {copied ? "Copied" : label}

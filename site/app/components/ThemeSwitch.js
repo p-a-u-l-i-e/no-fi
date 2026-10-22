@@ -1,6 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useSyncExternalStore } from "react";
+import { spring } from "@/lib/springs";
 
 const KEY = "no-fi-theme";
 
@@ -57,7 +59,7 @@ export default function ThemeSwitch() {
     <div
       role="group"
       aria-label="Theme"
-      className="flex items-center gap-0.5 rounded-full bg-chip p-0.5"
+      className="flex items-center gap-0.5 rounded-full bg-chip p-1"
     >
       {options.map((option) => {
         const active = theme === option.value;
@@ -68,15 +70,20 @@ export default function ThemeSwitch() {
             aria-label={option.label}
             aria-pressed={active}
             onClick={() => applyTheme(option.value)}
-            className={`grid size-7 place-items-center rounded-full transition-[background-color,color,box-shadow] duration-150 ${
-              active
-                ? "bg-card text-ink shadow-[0_1px_2px_rgb(0_0_0/0.12)]"
-                : "text-muted hover:text-ink"
+            className={`relative grid size-7 place-items-center rounded-full transition-colors duration-80 ${
+              active ? "text-ink" : "text-muted hover:text-ink"
             }`}
           >
+            {active ? (
+              <motion.span
+                layoutId="theme-thumb"
+                transition={spring.moderate}
+                className="absolute inset-0 rounded-full bg-card shadow-[0_1px_2px_rgb(0_0_0/0.12)]"
+              />
+            ) : null}
             <svg
               viewBox="0 0 16 16"
-              className="size-4"
+              className="relative size-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.4"

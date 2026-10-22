@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
+import { useFluidHover, useRegisterFluidHoverItem } from "@/hooks/use-fluid-hover";
 
 // Column counts at each breakpoint. Keep in step with the grid classes below.
 const COLUMNS = { sm: 2, lg: 4 };
@@ -29,32 +31,57 @@ function fillerClasses(count) {
   ].join(" ");
 }
 
+// A filter chip. It joins the group's hover so one highlight glides between
+// chips instead of each chip repainting its own fill.
+function Chip({ index, registerItem, active, onClick, children }) {
+  const ref = useRef(null);
+  useRegisterFluidHoverItem(registerItem, index, ref);
+  return (
+    <button
+      ref={ref}
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      className={`relative inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-[13px] font-medium transition-colors duration-80 ${
+        active ? "border-ink bg-ink text-page" : "border-line text-ink"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function VocabularyGrid({ groups, items }) {
   const [group, setGroup] = useState("All");
+  const chipsRef = useRef(null);
+  const hover = useFluidHover(chipsRef, { axis: "xy" });
   const visible = group === "All" ? items : items.filter((item) => item.group === group);
   const count = (name) =>
     name === "All" ? items.length : items.filter((item) => item.group === name).length;
 
   return (
     <>
-      <div role="group" aria-label="Filter by group" className="mt-8 flex flex-wrap gap-2">
-        {["All", ...groups].map((name) => {
+      <div
+        ref={chipsRef}
+        role="group"
+        aria-label="Filter by group"
+        className="relative mt-8 flex flex-wrap gap-2"
+        {...hover.handlers}
+      >
+        <FluidHoverHighlight hover={hover} className="rounded-full bg-chip" />
+        {["All", ...groups].map((name, index) => {
           const active = group === name;
           return (
-            <button
+            <Chip
               key={name}
-              type="button"
-              aria-pressed={active}
+              index={index}
+              registerItem={hover.registerItem}
+              active={active}
               onClick={() => setGroup(name)}
-              className={`inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[13px] font-medium transition-colors duration-150 ${
-                active
-                  ? "bg-ink text-page"
-                  : "bg-chip text-ink hover:bg-chip-hover"
-              }`}
             >
               {name}
               <span className={active ? "opacity-60" : "text-muted"}>{count(name)}</span>
-            </button>
+            </Chip>
           );
         })}
       </div>

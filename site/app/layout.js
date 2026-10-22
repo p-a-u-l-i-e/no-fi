@@ -1,5 +1,6 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import MotionProvider from "./components/MotionProvider";
 import { SITE_NAME, SITE_URL } from "./site-config";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -65,7 +66,9 @@ export default function RootLayout({ children }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

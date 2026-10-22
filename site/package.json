@@ -13,9 +13,12 @@
     "prebuild": "npm run sync-skill"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "motion": "^14.5.0",
     "next": "16.4.2",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
