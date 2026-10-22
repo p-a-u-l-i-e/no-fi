@@ -1,4 +1,4 @@
-![no-fi: wireframes without the distraction](assets/banner.png)
+![no-fi: wireframes without the distraction](https://raw.githubusercontent.com/p-a-u-l-i-e/no-fi/main/assets/banner.png)
 
 # no-fi
 
@@ -44,7 +44,15 @@ Pick one. Each puts the `no-fi/` folder where your agent loads skills from.
 **With npx**
 
 ```sh
-npx skills add p-a-u-l-i-e/no-fi
+npx no-fi-skill
+```
+
+This copies the skill into `~/.claude/skills/no-fi`. Add `--project` to install it into `./.claude/skills/no-fi` instead, and `--force` to replace an existing install.
+
+**With the skills CLI**
+
+```sh
+npx skills add p-a-u-l-i-e/no-fi --skill no-fi
 ```
 
 **By hand**
@@ -119,6 +127,7 @@ Two scripts ship with the skill. Each comes in Node and Python, with the same ou
 ```sh
 node no-fi/scripts/check_wireframe.mjs wireframe.txt
 python3 no-fi/scripts/check_wireframe.py wireframe.txt
+npx no-fi-skill check wireframe.txt
 ```
 
 It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value, heatmaps without a legend, and column charts that don't say what a row is worth.
@@ -140,7 +149,9 @@ no-fi/               the skill
   vocabulary.json    the element vocabulary as data
   examples/          finished example screens
   scripts/           wireframe and coverage checks
+bin/no-fi-skill.mjs  the npx no-fi-skill command
 assets/              README images
+site/                the no-fi.dev site
 ```
 
 ## License

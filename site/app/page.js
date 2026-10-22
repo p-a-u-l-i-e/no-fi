@@ -8,7 +8,7 @@ import SiteNav from "./components/SiteNav";
 import VocabularyGrid from "./components/VocabularyGrid";
 import { entries } from "./lib/changelog";
 import { installPrompt } from "./lib/install-prompt";
-import { REPO, REPO_URL, SITE_URL } from "./site-config";
+import { REPO_URL, SITE_URL } from "./site-config";
 
 const content = (...parts) => path.join(process.cwd(), "content", ...parts);
 const readExample = (file) => fs.readFileSync(content("examples", file), "utf8");
@@ -105,8 +105,8 @@ const installOptions = [
   {
     id: "npx",
     title: "Install with npx",
-    note: "Pulls the skill from the GitHub repository.",
-    command: `npx skills add ${REPO}`,
+    note: "Copies the skill into ~/.claude/skills. Add --project for this repo only.",
+    command: "npx no-fi-skill",
   },
   {
     id: "manual",

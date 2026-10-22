@@ -1,0 +1,35 @@
+{
+  "name": "no-fi-skill",
+  "version": "0.2.0",
+  "description": "An agent skill that draws UI wireframes and charts as plain text, so teams discuss layout and flow instead of color and type.",
+  "keywords": [
+    "wireframe",
+    "plain-text",
+    "ascii",
+    "agent-skill",
+    "claude",
+    "low-fidelity",
+    "prototyping"
+  ],
+  "homepage": "https://no-fi.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p-a-u-l-i-e/no-fi.git"
+  },
+  "bugs": "https://github.com/p-a-u-l-i-e/no-fi/issues",
+  "license": "MIT",
+  "author": "Incomparable (https://incomparable.design)",
+  "type": "module",
+  "bin": {
+    "no-fi-skill": "bin/no-fi-skill.mjs"
+  },
+  "files": [
+    "bin",
+    "no-fi",
+    "!**/__pycache__",
+    "!**/.DS_Store"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
