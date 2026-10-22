@@ -8,6 +8,8 @@
     "url": "https://incomparable.design"
   },
   "homepage": "https://no-fi.dev",
+  "supportUrl": "https://github.com/p-a-u-l-i-e/no-fi/issues",
+  "documentationUrl": "https://github.com/p-a-u-l-i-e/no-fi#readme",
   "repository": "https://github.com/p-a-u-l-i-e/no-fi",
   "license": "MIT",
   "keywords": ["wireframe", "plain-text", "ascii", "low-fidelity", "ux", "prototyping", "design"]
