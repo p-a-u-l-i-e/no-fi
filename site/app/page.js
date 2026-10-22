@@ -3,7 +3,6 @@ import path from "node:path";
 import Link from "next/link";
 import CopyButton from "./components/CopyButton";
 import LatticeBackground from "./components/LatticeBackground";
-import RuntimeCard from "./components/RuntimeCard";
 import SiteNav from "./components/SiteNav";
 import VocabularyGrid from "./components/VocabularyGrid";
 import { entries } from "./lib/changelog";
@@ -116,23 +115,14 @@ const installOptions = [
   },
 ];
 
-const commands = [
-  {
-    title: "Check a wireframe",
-    note: "Fails on unsupported characters, broken or misaligned boxes, and wrong progress bars.",
-    commands: {
-      node: "node no-fi/scripts/check_wireframe.mjs wireframe.txt",
-      python: "python3 no-fi/scripts/check_wireframe.py wireframe.txt",
-    },
-    id: "check",
-  },
-];
+const checkCommand = "npx no-fi-skill check wireframe.txt";
 
-const quickCheck = {
-  title: "Check without installing",
-  note: "Runs the same checker straight from npm.",
-  command: "npx no-fi-skill check wireframe.txt",
-};
+// Asks the README uses too. Any request for a wireframe or sketch loads the skill.
+const asks = [
+  "Wireframe a send-money form with three steps.",
+  "Draw the settings page for notification preferences.",
+  "Let's talk through the transactions table before we design it.",
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -401,12 +391,30 @@ export default function Page() {
               <CommandCard key={item.id} item={item} />
             ))}
           </div>
-          <h3 className="mt-12 text-lg font-medium tracking-[-0.01em]">Then check your work</h3>
-          <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {commands.map((item) => (
-              <RuntimeCard key={item.id} title={item.title} note={item.note} commands={item.commands} />
+          <p className="mt-12 max-w-[60ch] text-muted">
+            Then ask for a screen the way you would ask a designer for a sketch. Saying
+            wireframe or sketch is enough, or type <code className="font-mono text-ink">/no-fi</code> in
+            Claude Code.
+          </p>
+          <ul className="mt-4 flex flex-col gap-1 rounded-[20px] border border-line bg-stage px-6 py-4 font-mono text-[13px] leading-6">
+            {asks.map((ask) => (
+              <li key={ask}>
+                <span className="select-none text-muted">&gt; </span>
+                {ask}
+              </li>
             ))}
-            <CommandCard item={quickCheck} />
+          </ul>
+
+          <p className="mt-12 max-w-[60ch] text-muted">
+            Your agent checks every wireframe before it shows you one. To check one yourself,
+            from anywhere:
+          </p>
+          <div className="mt-4 flex items-center justify-between gap-4 rounded-[20px] border border-line bg-stage py-4 pl-6 pr-4">
+            <pre className="min-w-0 overflow-x-auto font-mono text-[13px] leading-6">
+              <span className="select-none text-muted">$ </span>
+              {checkCommand}
+            </pre>
+            <CopyButton text={checkCommand} />
           </div>
         </section>
       </main>
