@@ -15,7 +15,8 @@
 //   ("one █ is $100"). Without a stated unit the length is not checked.
 // - A chart drawn with shade blocks needs a legend: "Low ... High" for a
 //   heatmap, or one naming every shade ("█ Food  ▓ Home") for stacked columns.
-// - A column chart needs a stated row value ("one row is $25").
+// - A column chart needs a stated row value ("one row is $25"), unless its
+//   legend names its shades (stacked columns).
 //
 // This is a port of check_wireframe.py. Keep the two in step.
 //
@@ -203,7 +204,8 @@ function checkCharts(lines) {
   }
 
   // A column chart needs to say what a row is worth.
-  if (/─{3}  ─{3}/.test(text) && !text.includes("one row is")) {
+  // Stacked columns name their shades instead.
+  if (/─{3}  ─{3}/.test(text) && !text.includes("one row is") && !text.match(SHADE_KEY)) {
     errors.push("column chart: state what one row is worth, e.g. '(one row is $25)'");
   }
   return errors;

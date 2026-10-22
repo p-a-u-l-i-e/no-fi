@@ -115,7 +115,7 @@ Each element should look like the component it represents, not a character that 
 | Column chart | `███` columns, one row per fixed unit, a `▁▂▃▄▅▆▇` top for the remainder, `───` baseline, labels below. ASCII fallback: `###` | State what one row is worth. The partial top is the remainder. |
 | Line chart | a `─` line that turns with `╭ ╮ ╰ ╯` and climbs with `│`, against a `$400 ┤` axis and a `└────` baseline. ASCII fallback: `o` points | Label the top, middle, and bottom of the axis. Each x label sits under the start of its step. |
 | Sparkline | `▁▂▃▄▅▆▇█` from low to high. ASCII fallback: `~` then `_ . - = + * #` | A trend with no axis. |
-| Stacked column | `███` columns built from `█ ▓ ▒ ░` segments, one row per fixed unit, `───` baseline, labels below, and a `█ Food  ▓ Home` legend. ASCII fallback: `# = : .` | State what one row is worth. Stack in legend order, darkest at the bottom. |
+| Stacked column | `███` columns of `█ ▓ ▒ ░` segments, with a `█ Food  ▓ Home` legend. ASCII fallback: `# = : .` | Stack in legend order, darkest at the bottom. |
 | Heatmap | blank, `░ ▒ ▓ █` from light to dark, two characters per cell, with a `Low ░ ▒ ▓ █ High` legend. ASCII fallback: `. : - = + * # % @` | Always draw the legend. |
 
 <!-- vocabulary:end -->

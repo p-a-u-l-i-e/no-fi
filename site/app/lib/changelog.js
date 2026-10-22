@@ -5,8 +5,8 @@ export const entries = [
     date: "2026-10-22",
     title: "Stacked columns",
     changes: [
-      "Stacked column replaces Stacked bar: columns built from █ ▓ ▒ ░ segments in legend order, darkest at the bottom, with a stated row value and a legend naming every shade, instead of a bar of letters. The vocabulary stays at 44 elements.",
-      "The checkers require a stacked column legend to name every shade it uses, and still require 'Low ░ ▒ ▓ █ High' for heatmaps. The Node and Python checkers still give identical output.",
+      "Stacked column replaces Stacked bar: columns built from █ ▓ ▒ ░ segments in legend order, darkest at the bottom, with a legend naming every shade, instead of a bar of letters. The vocabulary stays at 44 elements.",
+      "The checkers require a stacked column legend to name every shade it uses, and don't ask stacked columns for a row value, and still require 'Low ░ ▒ ▓ █ High' for heatmaps. The Node and Python checkers still give identical output.",
       "Line charts are drawn as a line: `─` runs that turn with ╭ ╮ ╰ ╯ and climb with │, against a ┤ axis. Rule 1 now allows those rounded corners, and `o` points are the ASCII fallback.",
       "The checkers accept ╭ ╮ ╰ ╯ as chart characters.",
       "The spending report screen shows spending by category as weekly stacked columns, and weekly spend as a line.",

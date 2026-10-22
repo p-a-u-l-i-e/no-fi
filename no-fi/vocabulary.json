@@ -340,9 +340,9 @@
     {
       "name": "Stacked column",
       "group": "Charts",
-      "draw": "`███` columns built from `█ ▓ ▒ ░` segments, one row per fixed unit, `───` baseline, labels below, and a `█ Food  ▓ Home` legend. ASCII fallback: `# = : .`",
-      "glyph": "(one row is $25)\n     ░░░\n▒▒▒  ▒▒▒\n▓▓▓  ▓▓▓\n███  ███\n───  ───\nMon  Tue\n█ Food  ▓ Home  ▒ Trip  ░ Other",
-      "note": "State what one row is worth. Stack in legend order, darkest at the bottom.",
+      "draw": "`███` columns of `█ ▓ ▒ ░` segments, with a `█ Food  ▓ Home` legend. ASCII fallback: `# = : .`",
+      "glyph": "          ░░░       ░░░\n▒▒▒  ░░░  ▒▒▒       ▓▓▓\n▓▓▓  ▓▓▓  ▓▓▓       ▓▓▓\n███  ▓▓▓  ███  ▓▓▓  ███\n███  ███  ███  ███  ███\n───  ───  ───  ───  ───\nMon  Tue  Wed  Thu  Fri\n█ Food  ▓ Home  ▒ Trip  ░ Other",
+      "note": "Stack in legend order, darkest at the bottom.",
       "patterns": ["([▓▒░])\\1\\1  ([▓▒░█])\\2\\2", "█ [A-Z][a-z]+[^▓\\n]*▓ [A-Z]"]
     },
     {

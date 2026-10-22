@@ -15,7 +15,8 @@ Bars and charts:
   ("one █ is $100"). Without a stated unit the length is not checked.
 - A chart drawn with shade blocks needs a legend: "Low ... High" for a
   heatmap, or one naming every shade ("█ Food  ▓ Home") for stacked columns.
-- A column chart needs a stated row value ("one row is $25").
+- A column chart needs a stated row value ("one row is $25"), unless its
+  legend names its shades (stacked columns).
 
 Usage: check_wireframe.py FILE [FILE ...]
 Exit status is 0 when every file passes, 1 otherwise.
@@ -179,7 +180,8 @@ def check_charts(lines):
             errors.append(f"stacked columns: the legend is missing {' '.join(missing)}")
 
     # A column chart needs to say what a row is worth.
-    if re.search(r"─{3}  ─{3}", text) and "one row is" not in text:
+    # Stacked columns name their shades instead.
+    if re.search(r"─{3}  ─{3}", text) and "one row is" not in text and not SHADE_KEY.search(text):
         errors.append("column chart: state what one row is worth, e.g. '(one row is $25)'")
     return errors
 
