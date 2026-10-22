@@ -1,6 +1,15 @@
 // Newest first. Add a new entry at the top. Skill changes only: no site changes.
 export const entries = [
   {
+    version: "0.3.1",
+    date: "2026-10-22",
+    title: "Claude plugin",
+    changes: [
+      "no-fi is also a Claude plugin, so it can be added from Claude's plugin directory and used in claude.ai, Cowork, and Claude Code.",
+      "The validate rule names the checker by its path inside the installed skill, so agents run it from wherever the skill was installed instead of looking for a no-fi/ folder in the project.",
+    ],
+  },
+  {
     version: "0.3.0",
     date: "2026-10-22",
     title: "Stacked columns",

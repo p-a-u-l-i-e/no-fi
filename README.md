@@ -39,7 +39,7 @@ The outer frame is double-lined, every box inside it is single-lined, and the pr
 
 ## Install
 
-Pick one. Each puts the `no-fi/` folder where your agent loads skills from.
+Pick one. Each puts the `no-fi` skill folder where your agent loads skills from.
 
 **With a prompt**
 
@@ -63,7 +63,7 @@ npx skills add p-a-u-l-i-e/no-fi --skill no-fi
 
 ```sh
 git clone https://github.com/p-a-u-l-i-e/no-fi.git
-cp -R no-fi/no-fi ~/.claude/skills/
+cp -R no-fi/plugin/skills/no-fi ~/.claude/skills/
 ```
 
 **On claude.ai**
@@ -86,7 +86,7 @@ Claude replies with a fenced code block, runs the checker on it, and adds a note
 
 ## The rules
 
-Seven rules keep every wireframe readable. The full text is in [`no-fi/SKILL.md`](no-fi/SKILL.md).
+Seven rules keep every wireframe readable. The full text is in [`SKILL.md`](plugin/skills/no-fi/SKILL.md).
 
 1. **Plain characters, plus box-drawing.** Printable ASCII, box-drawing borders, and block characters for bars and charts. No emoji, no tabs.
 2. **Double outside, single inside.** The outermost container uses double lines. Every box inside it uses single lines.
@@ -106,21 +106,21 @@ Seven rules keep every wireframe readable. The full text is in [`no-fi/SKILL.md`
 - Open states are drawn open: a **select** with its menu below, an **accordion** with its content under it.
 - **Modals**, **toasts**, and **tooltips** are cards drawn inside the screen they sit on.
 
-The complete table, with a drawing and a note for each element, is in [`no-fi/SKILL.md`](no-fi/SKILL.md). The same data is in [`no-fi/vocabulary.json`](no-fi/vocabulary.json).
+The complete table, with a drawing and a note for each element, is in [`SKILL.md`](plugin/skills/no-fi/SKILL.md). The same data is in [`vocabulary.json`](plugin/skills/no-fi/vocabulary.json).
 
 ## Examples
 
-Seven finished screens in [`no-fi/examples/`](no-fi/examples), built to use the whole vocabulary:
+Seven finished screens in [`examples/`](plugin/skills/no-fi/examples), built to use the whole vocabulary:
 
 | Screen | File |
 | --- | --- |
-| Fintech dashboard | [`fintech-dashboard.txt`](no-fi/examples/fintech-dashboard.txt) |
-| Send money form | [`send-money-form.txt`](no-fi/examples/send-money-form.txt) |
-| Transactions table | [`transactions-table.txt`](no-fi/examples/transactions-table.txt) |
-| Spending report | [`spending-report.txt`](no-fi/examples/spending-report.txt) |
-| Card details | [`card-details.txt`](no-fi/examples/card-details.txt) |
-| Notification settings | [`settings-notifications.txt`](no-fi/examples/settings-notifications.txt) |
-| Activity patterns | [`activity-patterns.txt`](no-fi/examples/activity-patterns.txt) |
+| Fintech dashboard | [`fintech-dashboard.txt`](plugin/skills/no-fi/examples/fintech-dashboard.txt) |
+| Send money form | [`send-money-form.txt`](plugin/skills/no-fi/examples/send-money-form.txt) |
+| Transactions table | [`transactions-table.txt`](plugin/skills/no-fi/examples/transactions-table.txt) |
+| Spending report | [`spending-report.txt`](plugin/skills/no-fi/examples/spending-report.txt) |
+| Card details | [`card-details.txt`](plugin/skills/no-fi/examples/card-details.txt) |
+| Notification settings | [`settings-notifications.txt`](plugin/skills/no-fi/examples/settings-notifications.txt) |
+| Activity patterns | [`activity-patterns.txt`](plugin/skills/no-fi/examples/activity-patterns.txt) |
 
 ## Check your work
 
@@ -134,19 +134,19 @@ The checker also ships with the skill, in Node and Python with the same output. 
 
 ```sh
 node ~/.claude/skills/no-fi/scripts/check_wireframe.mjs wireframe.txt
-python3 no-fi/scripts/check_wireframe.py wireframe.txt
+python3 plugin/skills/no-fi/scripts/check_wireframe.py wireframe.txt
 ```
 
 It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value, heatmaps and stacked columns without a legend, and column charts that don't say what a row is worth.
 
 ## Maintaining the vocabulary
 
-`no-fi/vocabulary.json` is the source of truth. These scripts live in `scripts/`, outside the skill, so they don't ship to users. After editing the vocabulary, run:
+`plugin/skills/no-fi/vocabulary.json` is the source of truth. These scripts live in `scripts/`, outside the skill, so they don't ship to users. After editing the vocabulary, run:
 
 ```sh
 python3 scripts/sync_vocabulary.py                 # rewrite the tables in SKILL.md
 node scripts/check_coverage.mjs                    # every element appears in an example
-node no-fi/scripts/check_wireframe.mjs no-fi/examples/*.txt
+node plugin/skills/no-fi/scripts/check_wireframe.mjs plugin/skills/no-fi/examples/*.txt
 ```
 
 `python3 scripts/check_coverage.py` gives the same coverage output without Node.
@@ -154,15 +154,17 @@ node no-fi/scripts/check_wireframe.mjs no-fi/examples/*.txt
 ## Repository layout
 
 ```
-no-fi/               the skill
-  SKILL.md           rules and vocabulary tables
-  vocabulary.json    the element vocabulary as data
-  examples/          finished example screens
-  scripts/           the wireframe checker
-scripts/             maintainer scripts: vocabulary sync and coverage
-bin/no-fi-skill.mjs  the npx no-fi-skill command
-assets/              README images
-site/                the no-fi.dev site
+plugin/                    the Claude plugin
+  .claude-plugin/          plugin.json
+  skills/no-fi/            the skill
+    SKILL.md               rules and vocabulary tables
+    vocabulary.json        the element vocabulary as data
+    examples/              finished example screens
+    scripts/               the wireframe checker
+scripts/                   maintainer scripts: vocabulary sync and coverage
+bin/no-fi-skill.mjs        the npx no-fi-skill command
+assets/                    README images
+site/                      the no-fi.dev site
 ```
 
 ## License

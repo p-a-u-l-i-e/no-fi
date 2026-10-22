@@ -9,7 +9,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const skill = path.join(root, "no-fi");
+const skill = path.join(root, "plugin", "skills", "no-fi");
 const { version } = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 
 const usage = `no-fi ${version}: wireframes without the distraction.

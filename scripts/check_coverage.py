@@ -13,8 +13,8 @@ import re
 import sys
 from pathlib import Path
 
-# The skill lives in no-fi/, next to this scripts/ folder.
-ROOT = Path(__file__).resolve().parent.parent / "no-fi"
+# The skill lives in plugin/skills/no-fi/.
+ROOT = Path(__file__).resolve().parent.parent / "plugin" / "skills" / "no-fi"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from check_wireframe import check_text  # noqa: E402

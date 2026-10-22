@@ -1,0 +1,15 @@
+{
+  "name": "no-fi",
+  "description": "no-fi, the plain-text wireframe skill, as a Claude plugin.",
+  "owner": {
+    "name": "Incomparable",
+    "url": "https://incomparable.design"
+  },
+  "plugins": [
+    {
+      "name": "no-fi",
+      "source": "./plugin",
+      "description": "Draw low-fidelity UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type."
+    }
+  ]
+}

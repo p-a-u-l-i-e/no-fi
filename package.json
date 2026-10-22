@@ -1,6 +1,6 @@
 {
   "name": "no-fi-skill",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An agent skill that draws UI wireframes and charts as plain text, so teams discuss layout and flow instead of color and type.",
   "keywords": [
     "wireframe",
@@ -25,7 +25,7 @@
   },
   "files": [
     "bin",
-    "no-fi",
+    "plugin/skills/no-fi",
     "!**/__pycache__",
     "!**/.DS_Store"
   ],

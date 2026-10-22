@@ -9,19 +9,19 @@ The changelog is the `entries` array in `site/app/lib/changelog.js`, newest
 first. It describes the **skill**. The site is a demo, so it never appears in it.
 
 ## What counts
-Log changes under `no-fi/`:
+Log changes under `plugin/` (the skill is `plugin/skills/no-fi/`):
 - rules or wording in `SKILL.md`
 - vocabulary elements and how they are drawn (`vocabulary.json`)
-- example screens in `no-fi/examples/`
-- the checkers in `no-fi/scripts/`
+- example screens in `plugin/skills/no-fi/examples/`
+- the checkers in `plugin/skills/no-fi/scripts/`
 - how the skill is installed or used
 
 Do **not** log anything under `site/`, or changes to the README, the banner, the
 license, or repo setup. If a change touches both, log only the skill part. If
-nothing under `no-fi/` changed, do not touch the changelog.
+nothing under `plugin/` changed, do not touch the changelog.
 
 ## Steps
-1. Run `git diff` (and `git status`) for `no-fi/` to see what actually changed.
+1. Run `git diff` (and `git status`) for `plugin/` to see what actually changed.
 2. Pick the version: patch for fixes and wording, minor for new or changed
    vocabulary, rules, or checks, major for changes that make existing
    wireframes or checker results invalid.

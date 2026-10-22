@@ -14,7 +14,7 @@ export const faq = [
   {
     question: "How do I know a wireframe is drawn correctly?",
     answer:
-      "Run `npx no-fi-skill check wireframe.txt`, or `node no-fi/scripts/check_wireframe.mjs wireframe.txt` once installed (a Python version gives the same output). It fails on broken or misaligned boxes, unsupported characters, and bars that disagree with their values.",
+      "Run `npx no-fi-skill check wireframe.txt`, or `node ~/.claude/skills/no-fi/scripts/check_wireframe.mjs wireframe.txt` once installed (a Python version gives the same output). It fails on broken or misaligned boxes, unsupported characters, and bars that disagree with their values.",
   },
   {
     question: "How is no-fi different from Figma, Balsamiq, or Excalidraw?",

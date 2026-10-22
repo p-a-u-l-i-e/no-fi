@@ -111,8 +111,8 @@ const installOptions = [
   {
     id: "manual",
     title: "Copy it yourself",
-    note: "Copy the folder into your Claude skills directory.",
-    command: "cp -R no-fi ~/.claude/skills/",
+    note: "From a clone of the repository, copy the skill folder into your Claude skills directory.",
+    command: "cp -R plugin/skills/no-fi ~/.claude/skills/",
   },
 ];
 

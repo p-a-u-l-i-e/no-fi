@@ -22,7 +22,7 @@ None.
 
 ## Constraints
 - No secrets or environment variables.
-- Examples are copied from `no-fi/examples/`. Re-copy them when the examples change.
+- Examples are copied from `plugin/skills/no-fi/examples/`. Re-copy them when the examples change.
 
 ## Definition of done
 - [x] Dependencies install
@@ -38,4 +38,4 @@ None.
 
 ## Open questions
 - Where to host it.
-- Whether the example files should be linked to `no-fi/examples/` rather than copied.
+- Whether the example files should be linked to `plugin/skills/no-fi/examples/` rather than copied.

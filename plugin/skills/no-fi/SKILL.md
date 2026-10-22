@@ -18,10 +18,10 @@ Draw screens as monospaced text. The goal is to make the conversation about stru
 7. **Validate.** Run the checker before showing the result:
 
    ```sh
-   node no-fi/scripts/check_wireframe.mjs path/to/wireframe.txt
+   node ${CLAUDE_SKILL_DIR}/scripts/check_wireframe.mjs path/to/wireframe.txt
    ```
 
-   Without Node, `python3 no-fi/scripts/check_wireframe.py` gives the same output.
+   `${CLAUDE_SKILL_DIR}` is the folder this file is in. Without Node, `python3 ${CLAUDE_SKILL_DIR}/scripts/check_wireframe.py` gives the same output.
 
    It fails on unsupported characters, tabs, ASCII box borders, boxes that don't close or line up, mixed double and single lines in one box, a double-line box nested inside another box, table dividers that don't land in the same column top and bottom, progress bars whose fill disagrees with their percentage, bar chart rows whose length disagrees with their value and stated unit, heatmaps and stacked columns without a legend, and column charts that don't say what a row is worth. Fix every failure before presenting the wireframe.
 

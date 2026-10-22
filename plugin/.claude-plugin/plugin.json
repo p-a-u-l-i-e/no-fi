@@ -1,0 +1,14 @@
+{
+  "name": "no-fi",
+  "displayName": "no-fi",
+  "version": "0.3.1",
+  "description": "Draw low-fidelity UI wireframes and charts as plain text, so teams discuss layout, content, and flow instead of color and type.",
+  "author": {
+    "name": "Incomparable",
+    "url": "https://incomparable.design"
+  },
+  "homepage": "https://no-fi.dev",
+  "repository": "https://github.com/p-a-u-l-i-e/no-fi",
+  "license": "MIT",
+  "keywords": ["wireframe", "plain-text", "ascii", "low-fidelity", "ux", "prototyping", "design"]
+}

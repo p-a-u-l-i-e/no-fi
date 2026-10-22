@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export const SKILL_DIR = path.join(process.cwd(), "..", "no-fi");
+export const SKILL_DIR = path.join(process.cwd(), "..", "plugin", "skills", "no-fi");
 
 const skip = new Set(["__pycache__", ".DS_Store"]);
 

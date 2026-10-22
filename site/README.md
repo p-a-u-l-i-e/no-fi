@@ -13,12 +13,12 @@ npm run lint
 
 ## Updating examples and vocabulary
 
-`content/examples/` and `content/vocabulary.json` are copies of `../no-fi/examples/` and `../no-fi/vocabulary.json`. The page reads both at build time, and works out which screen uses which element from the same patterns the coverage check uses. After changing the originals, copy them again:
+`content/examples/` and `content/vocabulary.json` are copies of `../plugin/skills/no-fi/examples/` and `../plugin/skills/no-fi/vocabulary.json`. The page reads both at build time, and works out which screen uses which element from the same patterns the coverage check uses. After changing the originals, copy them again:
 
 ```sh
 rm content/examples/*.txt
-cp ../no-fi/examples/*.txt content/examples/
-cp ../no-fi/vocabulary.json content/vocabulary.json
+cp ../plugin/skills/no-fi/examples/*.txt content/examples/
+cp ../plugin/skills/no-fi/vocabulary.json content/vocabulary.json
 ```
 
 ## Fonts
